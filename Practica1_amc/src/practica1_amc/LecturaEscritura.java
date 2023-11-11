@@ -19,6 +19,7 @@ public class LecturaEscritura {
     public ArrayList<Punto> lectura(String Fichero) {
         ArrayList<Punto> PuntoCoordenadas = new ArrayList<>();
         Punto aux;
+        int id=0;
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(Fichero));
@@ -30,13 +31,13 @@ public class LecturaEscritura {
                 }
                 if (isReadingCoordinates) {
                     if (line.equals("EOF")) {
-                        // Fin de la sección de coordenadas
+                        // Fin de la seccion de coordenadas
                         break;
                     }
                     String[] parts = line.split(" ");
                     if (parts.length >= 3) {
                         // Asumiendo que el formato es "nodo xCoord yCoord"
-                        aux = new Punto(Double.parseDouble(parts[1]), Double.parseDouble(parts[2]));
+                        aux = new Punto(Double.parseDouble(parts[1]), Double.parseDouble(parts[2]),id++);
                         PuntoCoordenadas.add(aux);
 
                     }
