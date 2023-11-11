@@ -109,5 +109,98 @@ public class LecturaEscritura {
             e.printStackTrace();
         }
     }
+    
+    
+    
+    public void crearArchivoTSPuni (ArrayList<Punto> ruta, double distancia, String archivo) {
+    try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(archivo));
+        writer.write("NAME : " + archivo);
+        writer.newLine();
+        writer.write("TYPE : TOUR");
+        writer.newLine();
+        writer.write("DIMENSION : " + ruta.size());
+        writer.newLine();
+        writer.write("SOLUTION: " + distancia); 
+        writer.newLine();
+        writer.write("TOUR_SECTION");
+        writer.newLine();
+
+        //para tener una cadena del orden de los nodos 
+        StringBuilder sequence = new StringBuilder();
+
+        for (int i = 0; i < ruta.size(); i++) {
+            sequence.append(ruta.get(i).getNumeracion()); // obtener el numero del nodo
+
+            if (i < ruta.size() - 1) {
+                sequence.append(", ");
+            }
+        }
+        
+        // Repetir el primer número para cerrar el ciclo
+        sequence.append(", " + ruta.get(0).getNumeracion());
+        writer.write(sequence.toString());
+        writer.newLine();
+
+        for (int i = 0; i < ruta.size(); i++) {
+            Punto nodoActual = ruta.get(i);
+            Punto nodoSiguiente = ruta.get((i + 1) % ruta.size()); 
+
+            double dis = nodoActual.distancia(nodoSiguiente);
+            writer.write( dis + " - " + nodoActual.getNumeracion() + "," + nodoSiguiente.getNumeracion());
+            writer.newLine();
+        }
+
+        writer.write("EOF");
+        writer.close();
+        System.out.println("Archivo " + archivo + " creado con éxito.");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+    
+        
+public void crearArchivoTSPbi (ArrayList<Punto> ruta,String archivo,double coste) {
+    try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(archivo));
+
+        writer.write("NAME : " + archivo);
+        writer.newLine();
+        writer.write("TYPE : TOUR");
+        writer.newLine();
+        writer.write("DIMENSION : " + ruta.size());
+        writer.newLine();
+        writer.write("SOLUTION: " + coste);
+        writer.newLine();
+        writer.write("TOUR_SECTION");
+        writer.newLine();
+
+        //mostramos el orden de los nodos
+        for (int i = 0; i < ruta.size(); i++) {
+            writer.write(Integer.toString(ruta.get(i).getNumeracion()));
+            writer.write(", ");
+        }
+
+ 
+        writer.write(Integer.toString(ruta.get(0).getNumeracion()));//este es el primero
+        
+        // y las distancia entre los nodos
+        writer.newLine();
+        for (int i = 0; i < ruta.size(); i++) {
+            Punto nodoActual = ruta.get(i);
+            Punto nodoSiguiente = ruta.get((i + 1) % ruta.size()); 
+
+            double distancia = nodoActual.distancia(nodoSiguiente);
+            writer.write(distancia + " - " + nodoActual.getNumeracion() + "," + nodoSiguiente.getNumeracion());
+            writer.newLine();
+        }
+
+        writer.write("EOF");
+        writer.close();
+        System.out.println("Resultado de estrategia bidireccional guardado en " + archivo);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
 }

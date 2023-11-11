@@ -13,6 +13,11 @@ public class Punto {
 
     private double x;
     private double y;
+    private int numeracion;
+
+    public int getNumeracion() {
+        return numeracion;
+    }
 
     public Punto(double x, double y) {
         this.x = x;
