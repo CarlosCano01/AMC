@@ -89,6 +89,7 @@ public class LecturaEscritura {
                 writer.write(i + " " + String.format("%.2f", alto) + " " + String.format("%.2f", ancho));
                 writer.newLine();
             }
+            //cosa
 //hola
             writer.write("EOF");
             writer.close();
