@@ -12,7 +12,7 @@ public class Menus {
     private int opcion;
 
     public int menuPrincipal(boolean peorCaso) {
-        System.out.println(" *** AMC. Practica 1. Curso 23/24 ***");
+        System.out.println(" *** AMC. Practica 1. Curso 23/24 ****");
         System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio Velázquez Muñoz");
         System.out.println(" ***     MENU PRINCIPAL sdfasd***");
         System.out.println(" PEOR CASO: " + (peorCaso ? "ON" : "OFF"));
