@@ -84,12 +84,12 @@ public class LecturaEscritura {
             Random random = new Random();
 
             for (int i = 1; i <= n; i++) {
-                double latitude = 16 + random.nextDouble() * 10;
-                double longitude = 92 + random.nextDouble() * 10;
-                writer.write(i + " " + String.format("%.2f", latitude) + " " + String.format("%.2f", longitude));
+                double alto = 16 + random.nextDouble() * 10;
+                double ancho = 92 + random.nextDouble() * 10;
+                writer.write(i + " " + String.format("%.2f", alto) + " " + String.format("%.2f", ancho));
                 writer.newLine();
             }
-
+//hola
             writer.write("EOF");
             writer.close();
             System.out.println("Archivo " + nombre + n + " creado con éxito.");
