@@ -13,10 +13,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 
-/**
- *
- * @author tomas
- */
+
 public class LecturaEscritura {
 
     public ArrayList<Punto> lectura(String Fichero) {
@@ -57,18 +54,20 @@ public class LecturaEscritura {
         return PuntoCoordenadas;
     }
 
-    public static void crearArchivoTSP(String nombre, int n) {
+    
+    
+    public static void crearArchivoTSP(String nombre, int n,int caso) {
         try {
             Locale.setDefault(Locale.US);
-            String carpeta = "dataset";
+            String carpeta = "archivos";
             String rutacompleta = carpeta + "/" + nombre + n + ".tsp";
             BufferedWriter writer = new BufferedWriter(new FileWriter(rutacompleta));
 
-            writer.write("NAME: dataset" + n);
+            writer.write("NAME: archivos" + n);
             writer.newLine();
             writer.write("TYPE: TSP");
             writer.newLine();
-            writer.write("COMMENT: " + n + "-Staedte in dataset" + n + " (Zaw Win)");
+            writer.write("COMMENT: " + n + "-Staedte in archivos" + n + " (Zaw Win)");
             writer.newLine();
             writer.write("DIMENSION: " + n);
             writer.newLine();
@@ -82,18 +81,30 @@ public class LecturaEscritura {
             writer.newLine();
 
             Random random = new Random();
-
+            int num,den;
+            double y,x,aux1;
             for (int i = 1; i <= n; i++) {
-                double alto = 16 + random.nextDouble() * 10;
-                double ancho = 92 + random.nextDouble() * 10;
+                if(caso==0){
+                    aux1=random.nextInt(1000) + 7; //7 y 1007
+                    y=(int) (aux1/((double)i+1+i*0.100)); //aux2; //+(i/3.0)
+                    x=1;
+                }else{
+                    num = random.nextInt(4000) + 1; //genera un número aleatorio entre 1 y 4000
+                    den = random.nextInt(11) + 7; //genera un aleatorio entre 7 y 17
+                    x = num / ((double) den + 0.37); //division con decimales
+                    y = (random.nextInt(4000) + 1) / ((double) (random.nextInt(11) + 7) + 0.37);
+                }
+                     
+                
+                double alto = (double)x;
+                double ancho = (double)y;
                 writer.write(i + " " + String.format("%.2f", alto) + " " + String.format("%.2f", ancho));
                 writer.newLine();
             }
-            //cosa
-//hola
+
             writer.write("EOF");
             writer.close();
-            System.out.println("Archivo " + nombre + n + " creado con Ã©xito.");
+            System.out.println("Archivo " + nombre + n + " creado con Exito.");
         } catch (IOException e) {
             e.printStackTrace();
         }
