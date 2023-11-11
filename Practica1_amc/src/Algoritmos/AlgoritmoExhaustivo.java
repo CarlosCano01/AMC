@@ -7,10 +7,7 @@ package Algoritmos;
 import java.util.ArrayList;
 import practica1_amc.Punto;
 
-/**
- *
- * @author tomas
- */
+
 public class AlgoritmoExhaustivo {
 
     
@@ -36,21 +33,23 @@ public class AlgoritmoExhaustivo {
     }
     
     public static void BusquedaExhauxtivaPoda(ArrayList<Punto> p){
-        AlgoritmoOrdenacion.OrdenaQuickSort(p);
+        ArrayList<Punto> clonP=p;
+        AlgoritmoOrdenacion.OrdenaQuickSort(clonP);
+        
         double distanciaMin = Double.MAX_VALUE;
         Punto p1=null;
         Punto p2=null;
-        for (int i = 0; i < p.size()-2;i++) {
+        for (int i = 0; i < clonP.size()-2;i++) {
             int j = i + 1;
-            while (j < p.size()) {
-                if ((p.get(j).getX() - p.get(i).getX()) >= distanciaMin) {
+            while (j < clonP.size()) {
+                if ((clonP.get(j).getX() - clonP.get(i).getX()) >= distanciaMin) {
                     j = p.size(); 
                 } else {
-                    double distancia = p.get(i).distancia(p.get(j));
+                    double distancia = clonP.get(i).distancia(clonP.get(j));
                     if (distancia < distanciaMin) {
                         distanciaMin = distancia;
-                        p1 = p.get(i);
-                        p2 = p.get(j);
+                        p1 = clonP.get(i);
+                        p2 = clonP.get(j);
                     }
                     j++;
                 }
