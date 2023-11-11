@@ -14,7 +14,7 @@ public class Menus {
     public int menuPrincipal(boolean peorCaso) {
         System.out.println(" *** AMC. Practica 1. Curso 23/24 ***");
         System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio Velázquez Muñoz");
-        System.out.println(" ***     MENU PRINCIPAL ***");
+        System.out.println(" ***     MENU PRINCIPAL sdfasdf***");
         System.out.println(" PEOR CASO: " + (peorCaso ? "ON" : "OFF"));
         System.out.println(" 1.- COMPROBAR TODOS LOS DATASET (FICHEROS)");
         System.out.println(" 2.- COMPROBAR TODAS LAS ESTRATEGIAS");
