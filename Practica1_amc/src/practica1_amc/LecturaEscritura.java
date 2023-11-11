@@ -56,7 +56,7 @@ public class LecturaEscritura {
 
     
     
-    public static void crearArchivoTSP(String nombre, int n,int caso) {
+    public static void crearArchivoTSP(String nombre, int n,boolean caso) {
         try {
             Locale.setDefault(Locale.US);
             String carpeta = "archivos";
@@ -84,7 +84,7 @@ public class LecturaEscritura {
             int num,den;
             double y,x,aux1;
             for (int i = 1; i <= n; i++) {
-                if(caso==0){
+                if(!caso){
                     aux1=random.nextInt(1000) + 7; //7 y 1007
                     y=(int) (aux1/((double)i+1+i*0.100)); //aux2; //+(i/3.0)
                     x=1;
