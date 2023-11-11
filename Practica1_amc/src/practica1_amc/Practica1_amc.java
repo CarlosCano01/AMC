@@ -12,14 +12,14 @@ public class Practica1_amc {
 
         AlgoritmoExhaustivo AExhauxtivo = new AlgoritmoExhaustivo();
         LecturaEscritura l = new LecturaEscritura();
-        String sDirectorio = "\\archivos";
+        String sDirectorio = "./archivos";
         File darchivos = new File(sDirectorio);
         String NombreFicheroActual;
         System.out.println("PEOR CASO");
         ArrayList<Punto> PuntoCoordenadas = l.lectura("archivos/segundo8.tsp");
-        System.out.println("MEDIO CASO");   
+        System.out.println("MEDIO CASO");
         ArrayList<Punto> PuntoCoordenadas2 = l.lectura("archivos/tercero8.tsp");
-        
+
         System.out.println("----------------------------------------------------------");
 
         Scanner scanner = new Scanner(System.in);
@@ -32,11 +32,16 @@ public class Practica1_amc {
             opcion = m.menuPrincipal(peorCaso);
             switch (opcion) {
                 case 1:
-                    // Lógica para la opción 1
-                    System.out.println("Has seleccionado la opción 1.");
+                    File[] ficheros = darchivos.listFiles();
+                    for (File fich : ficheros) {
+                        System.out.println();
+                        System.out.println(fich.getName());
+                        System.out.println("-----------------");
+                        ArrayList<Punto> PuntoC = l.lectura(sDirectorio+'/'+fich.getName());
+                        
+                    }
                     break;
                 case 2:
-                    // Lógica para la opción 2
                     System.out.println("Has seleccionado la opción 2.");
                     break;
                 case 3:
@@ -76,11 +81,9 @@ public class Practica1_amc {
                     } while (opcion2 != 0);
                     break;
                 case 4:
-                    // Lógica para la opción 4
                     System.out.println("Has seleccionado la opción 4.");
                     break;
                 case 5:
-                    // Lógica para la opción 5
                     System.out.println("Has seleccionado la opción 5.");
                     break;
                 case 6:
@@ -97,15 +100,11 @@ public class Practica1_amc {
                     int numero = scanner.nextInt();
                     //System.out.println("Escriba el caso que quiera PEOR: 0 /MEDIO: 1: ");
                     //int caso = scanner.nextInt();
-                    LecturaEscritura.crearArchivoTSP(nombre, numero,peorCaso);
+                    LecturaEscritura.crearArchivoTSP(nombre, numero, peorCaso);
                     break;
                 case 8:
-                    // Lógica para la opción 8
                     System.out.println("Has seleccionado la opción 8.");
-                    File[] ficheros = darchivos.listFiles();
-                    for (File fich : ficheros) {
-                        System.out.println(fich.getName());
-        }
+
                     break;
                 case 0:
                     System.out.println("Saliendo del programa. ¡Hasta luego!");

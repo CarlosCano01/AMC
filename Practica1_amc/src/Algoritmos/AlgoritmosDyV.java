@@ -7,19 +7,17 @@ package Algoritmos;
 import java.util.ArrayList;
 import practica1_amc.Punto;
 
-/**
- *
- * @author carlo
- */
+
 public class AlgoritmosDyV {
 
     public static double DyV(ArrayList<Punto> p) {
-        AlgoritmoOrdenacion.OrdenaQuickSort(p);
-        for (int i = 0; i < p.size(); i++) {
-            System.out.println("Nodo " + (i + 1) + ": x = " + p.get(i).getX()
-                    + ", y = " + p.get(i).getY());
+        ArrayList<Punto> clonP=p;
+        AlgoritmoOrdenacion.OrdenaQuickSort(clonP);
+        for (int i = 0; i < clonP.size(); i++) {
+            System.out.println("Nodo " + (i + 1) + ": x = " + clonP.get(i).getX()
+                    + ", y = " + clonP.get(i).getY());
         }
-        return ParesCercanosX(p, 0, p.size()-1);
+        return ParesCercanosX(clonP, 0, p.size()-1);
     }
 
     private static double ParesCercanosX(ArrayList<Punto> p, int izq, int dcha) {

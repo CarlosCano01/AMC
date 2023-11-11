@@ -7,10 +7,7 @@ package Algoritmos;
 import java.util.ArrayList;
 import practica1_amc.Punto;
 
-/**
- *
- * @author carlo
- */
+
 public class AlgoritmoOrdenacion {
 
 

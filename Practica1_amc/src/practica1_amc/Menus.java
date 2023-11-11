@@ -2,10 +2,7 @@ package practica1_amc;
 
 import java.util.Scanner;
 
-/**
- *
- * @author tomas
- */
+
 public class Menus {
 
     private Scanner scanner = new Scanner(System.in);
@@ -16,7 +13,7 @@ public class Menus {
         System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio Velázquez Muñoz");
         System.out.println(" ***     MENU PRINCIPAL ***");
         System.out.println(" PEOR CASO: " + (peorCaso ? "ON" : "OFF"));
-        System.out.println(" 1.- COMPROBAR TODOS LOS DATASET (FICHEROS)");
+        System.out.println(" 1.- COMPROBAR TODOS LOS FICHEROS");
         System.out.println(" 2.- COMPROBAR TODAS LAS ESTRATEGIAS");
         System.out.println(" 3.- ESTUDIAR 1 ESTRATEGIA");
         System.out.println(" 4.- COMPARAR 2 ESTRATEGIAS");
