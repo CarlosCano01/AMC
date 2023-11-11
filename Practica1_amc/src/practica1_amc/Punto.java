@@ -8,10 +8,7 @@ import static java.lang.Math.sqrt;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author tomas
- */
+
 public class Punto {
 
     private double x;
