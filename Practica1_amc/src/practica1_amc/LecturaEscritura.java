@@ -89,7 +89,7 @@ public class LecturaEscritura {
                 writer.write(i + " " + String.format("%.2f", alto) + " " + String.format("%.2f", ancho));
                 writer.newLine();
             }
-
+//hola
             writer.write("EOF");
             writer.close();
             System.out.println("Archivo " + nombre + n + " creado con éxito.");
