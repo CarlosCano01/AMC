@@ -3,20 +3,25 @@ package practica1_amc;
 import Algoritmos.AlgoritmoExhaustivo;
 import Algoritmos.AlgoritmosDyV;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Practica1_amc {
 
     public static void main(String[] args) {
-        
-        AlgoritmoExhaustivo AExhauxtivo=new AlgoritmoExhaustivo();
-        LecturaEscritura l=new LecturaEscritura();
-        ArrayList<Punto> PuntoCoordenadas = l.lectura("ch130.tsp");
-        
+
+        AlgoritmoExhaustivo AExhauxtivo = new AlgoritmoExhaustivo();
+        LecturaEscritura l = new LecturaEscritura();
+        System.out.println("PEOR CASO");
+        ArrayList<Punto> PuntoCoordenadas = l.lectura("archivos/segundo8.tsp");
+        System.out.println("MEDIO CASO");   
+        ArrayList<Punto> PuntoCoordenadas2 = l.lectura("archivos/tercero8.tsp");
+
         System.out.println("----------------------------------------------------------");
-        
-        
+
+        Scanner scanner = new Scanner(System.in);
+
         Menus m = new Menus();
-        
+
         boolean peorCaso = false;
         int opcion, opcion2;
         do {
@@ -43,6 +48,10 @@ public class Practica1_amc {
                                 // Lógica para la opción 2 (ExhaustivoPoda)
                                 System.out.println("Has seleccionado la opción 2 (ExhaustivoPoda).");
                                 AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(PuntoCoordenadas);
+                                for (int i = 0; i < PuntoCoordenadas.size(); i++) {
+                                    System.out.println("Nodo " + (i + 1) + ": x = " + PuntoCoordenadas.get(i).getX()
+                                            + ", y = " + PuntoCoordenadas.get(i).getY());
+                                }
                                 break;
                             case 3:
                                 // Lógica para la opción 3 (DivideVenceras)
@@ -71,15 +80,20 @@ public class Practica1_amc {
                     System.out.println("Has seleccionado la opción 5.");
                     break;
                 case 6:
-                    if(peorCaso==true){
-                        peorCaso=false;
-                    }else{
-                        peorCaso=true;
+                    if (peorCaso == true) {
+                        peorCaso = false;
+                    } else {
+                        peorCaso = true;
                     }
                     break;
                 case 7:
-                    // Lógica para la opción 7
-                    System.out.println("Has seleccionado la opción 7.");
+                    System.out.println("Escriba el nombre del fichero: ");
+                    String nombre = scanner.nextLine();
+                    System.out.println("Escriba el numero de puntos: ");
+                    int numero = scanner.nextInt();
+                    System.out.println("Escriba el caso que quiera PEOR: 0 /MEDIO: 1: ");
+                    int caso = scanner.nextInt();
+                    LecturaEscritura.crearArchivoTSP(nombre, numero,caso);
                     break;
                 case 8:
                     // Lógica para la opción 8
