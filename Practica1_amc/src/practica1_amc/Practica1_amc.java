@@ -2,6 +2,7 @@ package practica1_amc;
 
 import Algoritmos.AlgoritmoExhaustivo;
 import Algoritmos.AlgoritmosDyV;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,11 +12,14 @@ public class Practica1_amc {
 
         AlgoritmoExhaustivo AExhauxtivo = new AlgoritmoExhaustivo();
         LecturaEscritura l = new LecturaEscritura();
+        String sDirectorio = "\\archivos";
+        File darchivos = new File(sDirectorio);
+        String NombreFicheroActual;
         System.out.println("PEOR CASO");
         ArrayList<Punto> PuntoCoordenadas = l.lectura("archivos/segundo8.tsp");
         System.out.println("MEDIO CASO");   
         ArrayList<Punto> PuntoCoordenadas2 = l.lectura("archivos/tercero8.tsp");
-
+        
         System.out.println("----------------------------------------------------------");
 
         Scanner scanner = new Scanner(System.in);
@@ -91,13 +95,17 @@ public class Practica1_amc {
                     String nombre = scanner.nextLine();
                     System.out.println("Escriba el numero de puntos: ");
                     int numero = scanner.nextInt();
-                    System.out.println("Escriba el caso que quiera PEOR: 0 /MEDIO: 1: ");
-                    int caso = scanner.nextInt();
-                    LecturaEscritura.crearArchivoTSP(nombre, numero,caso);
+                    //System.out.println("Escriba el caso que quiera PEOR: 0 /MEDIO: 1: ");
+                    //int caso = scanner.nextInt();
+                    LecturaEscritura.crearArchivoTSP(nombre, numero,peorCaso);
                     break;
                 case 8:
                     // Lógica para la opción 8
                     System.out.println("Has seleccionado la opción 8.");
+                    File[] ficheros = darchivos.listFiles();
+                    for (File fich : ficheros) {
+                        System.out.println(fich.getName());
+        }
                     break;
                 case 0:
                     System.out.println("Saliendo del programa. ¡Hasta luego!");
