@@ -25,16 +25,16 @@ public class AlgoritmoExhaustivo {
                 }
             }
         }
-        System.out.println("Punto más cercano 1: (" + p1.getX() + ", " + p1.getY() + ")");
-        System.out.println("Punto más cercano 2: (" + p2.getX()+ ", " + p2.getY() + ")");
-        System.out.println("Distancia mínima: " + distanciaMin);
+        System.out.println("Punto mï¿½s cercano 1: (" + p1.getX() + ", " + p1.getY() + ")");
+        System.out.println("Punto mï¿½s cercano 2: (" + p2.getX()+ ", " + p2.getY() + ")");
+        System.out.println("Distancia mï¿½nima: " + distanciaMin);
         
         return distanciaMin;
     }
     
     public static void BusquedaExhauxtivaPoda(ArrayList<Punto> p){
         ArrayList<Punto> clonP=p;
-        AlgoritmoOrdenacion.OrdenaQuickSort(clonP);
+        AlgoritmoOrdenacion.OrdenaQuickSortX(clonP);
         
         double distanciaMin = Double.MAX_VALUE;
         Punto p1=null;
@@ -57,8 +57,8 @@ public class AlgoritmoExhaustivo {
         }
 
         
-        System.out.println("Punto más cercano 1: (" + p1.getX() + ", " + p1.getY() + ")");
-        System.out.println("Punto más cercano 2: (" + p2.getX()+ ", " + p2.getY() + ")");
-        System.out.println("Distancia mínima: " + distanciaMin);
+        System.out.println("Punto mï¿½s cercano 1: (" + p1.getX() + ", " + p1.getY() + ")");
+        System.out.println("Punto mï¿½s cercano 2: (" + p2.getX()+ ", " + p2.getY() + ")");
+        System.out.println("Distancia mï¿½nima: " + distanciaMin);
     }
 }

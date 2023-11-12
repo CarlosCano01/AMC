@@ -41,9 +41,49 @@ public class Practica1_amc {
                     }
                     break;
                 case 2:
-                    inicio = 0;
-                    long tiempo1 = 0;
-                    long tiempo2 = 0;
+
+
+                    break;
+                case 3:
+                    do {
+                        opcion2 = m.menuEstrategias(peorCaso);
+                        switch (opcion2) {
+                            case 1:
+                                // Lógica para la opción 1 (Exhaustivo)
+                                System.out.println("Has seleccionado la opción 1 (Exhaustivo).");
+                                AlgoritmoExhaustivo.BusquedaExhauxtiva(PuntoCoordenadas);
+                                break;
+                            case 2:
+                                // Lógica para la opción 2 (ExhaustivoPoda)
+                                System.out.println("Has seleccionado la opción 2 (ExhaustivoPoda).");
+                                AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(PuntoCoordenadas);
+                                for (int i = 0; i < PuntoCoordenadas.size(); i++) {
+                                    System.out.println("Nodo " + (i + 1) + ": x = " + PuntoCoordenadas.get(i).getX()
+                                            + ", y = " + PuntoCoordenadas.get(i).getY());
+                                }
+                                break;
+                            case 3:
+                                // Lógica para la opción 3 (DivideVenceras)
+                                System.out.println("Has seleccionado la opción 3 (DivideVenceras).");
+                                AlgoritmosDyV.DyV(PuntoCoordenadas);
+                                break;
+                            case 4:
+                                // Lógica para la opción 4 (DyV Mejorado)
+                                System.out.println("Has seleccionado la opción 4 (DyV Mejorado).");
+                                break;
+                            case 0:
+                                System.out.println("Volviendo al menu anterior.");
+                                break;
+                            default:
+                                System.out.println("Opción no válida. Por favor, elige una opción válida.");
+                                break;
+                        }
+                    } while (opcion2 != 0);
+                    break;
+                case 4:
+                                        inicio = 0;
+                    long  tiempo1 = 0;
+                     long  tiempo2 = 0;
                     System.out.println("Selecciona el primero: ");
                     int primero = m.menuEstrategias(peorCaso);
                     System.out.println("Selecciona el segundo: ");
@@ -125,46 +165,6 @@ public class Practica1_amc {
                         System.out.println(i + "    " + tiempo1 + "         " + tiempo2);
 
                     }
-
-                    break;
-                case 3:
-                    do {
-                        opcion2 = m.menuEstrategias(peorCaso);
-                        switch (opcion2) {
-                            case 1:
-                                // Lógica para la opción 1 (Exhaustivo)
-                                System.out.println("Has seleccionado la opción 1 (Exhaustivo).");
-                                AlgoritmoExhaustivo.BusquedaExhauxtiva(PuntoCoordenadas);
-                                break;
-                            case 2:
-                                // Lógica para la opción 2 (ExhaustivoPoda)
-                                System.out.println("Has seleccionado la opción 2 (ExhaustivoPoda).");
-                                AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(PuntoCoordenadas);
-                                for (int i = 0; i < PuntoCoordenadas.size(); i++) {
-                                    System.out.println("Nodo " + (i + 1) + ": x = " + PuntoCoordenadas.get(i).getX()
-                                            + ", y = " + PuntoCoordenadas.get(i).getY());
-                                }
-                                break;
-                            case 3:
-                                // Lógica para la opción 3 (DivideVenceras)
-                                System.out.println("Has seleccionado la opción 3 (DivideVenceras).");
-                                AlgoritmosDyV.DyV(PuntoCoordenadas);
-                                break;
-                            case 4:
-                                // Lógica para la opción 4 (DyV Mejorado)
-                                System.out.println("Has seleccionado la opción 4 (DyV Mejorado).");
-                                break;
-                            case 0:
-                                System.out.println("Volviendo al menu anterior.");
-                                break;
-                            default:
-                                System.out.println("Opción no válida. Por favor, elige una opción válida.");
-                                break;
-                        }
-                    } while (opcion2 != 0);
-                    break;
-                case 4:
-                    System.out.println("Has seleccionado la opción 4.");
                     break;
                 case 5:
                     System.out.println("Has seleccionado la opción 5.");

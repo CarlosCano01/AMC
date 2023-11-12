@@ -12,14 +12,14 @@ public class AlgoritmosDyV {
 
     public static double DyV(ArrayList<Punto> p) {
         ArrayList<Punto> clonP=p;
-        AlgoritmoOrdenacion.OrdenaQuickSort(clonP);
+        AlgoritmoOrdenacion.OrdenaQuickSortX(clonP);
         return ParesCercanosX(clonP, 0, p.size()-1);
     }
      
     public static double DyVMejorado(ArrayList<Punto> p) {
         ArrayList<Punto> clonP=p;
-        AlgoritmoOrdenacion.OrdenaQuickSort(clonP);
-        return ParesCercanosY(p, 0, p.size()-1);
+        AlgoritmoOrdenacion.OrdenaQuickSortY(clonP);
+        return ParesCercanosY(clonP, 0, p.size()-1);
     }
 
     private static double ParesCercanosX(ArrayList<Punto> p, int izq, int dcha) {
@@ -45,6 +45,27 @@ public class AlgoritmosDyV {
         
         return Math.min(minDist, stripMin);
     }
+    
+        public static double ParesCercanosY(ArrayList<Punto> p, int izq, int dcha) {
+        if (dcha - izq <= 12) {
+            ArrayList<Punto> Pcercanos = new ArrayList<>();
+            for (int i = izq; i < dcha+1 ; i++) {
+                Pcercanos.add(p.get(i));
+            }
+            return AlgoritmoExhaustivo.BusquedaExhauxtiva(Pcercanos);
+        }
+
+        int mid = (izq + dcha) / 2;
+        Punto medio = p.get(mid);
+
+        double dIzq = ParesCercanosY(p, izq, mid);
+        double dDcha = ParesCercanosY(p, mid + 1, dcha);
+        double minDist = Math.min(dIzq, dDcha);
+
+        double stripMin = stripClosestY(p, izq, dcha, medio, minDist);
+
+        return Math.min(minDist, stripMin);
+    }
 
     private static double stripClosestX(ArrayList<Punto> p, int izq, int dcha, Punto medio, double minDist) {
         double min = minDist;
@@ -54,6 +75,20 @@ public class AlgoritmosDyV {
                     if (p.get(j).getY() - p.get(i).getY() >= min) {
                         break;
                     }
+                    double dist = p.get(i).distancia(p.get(j));
+                    if (dist < min) {
+                        min = dist;
+                    }
+                }
+            }
+        }
+        return min;
+    }
+    private static double stripClosestY(ArrayList<Punto> p, int izq, int dcha, Punto medio, double minDist) {
+        double min = minDist;
+        for (int i = izq; i <= dcha; i++) {
+            if (Math.abs(p.get(i).getY()- medio.getY()) < min) {
+                for (int j = i + 1; j <= dcha; j++) {
                     double dist = p.get(i).distancia(p.get(j));
                     if (dist < min) {
                         min = dist;
