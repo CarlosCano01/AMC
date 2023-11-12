@@ -14,14 +14,14 @@ public class Menus {
         System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio VelÃ¡zquez MuÃ±oz");
         System.out.println(" ***     MENU PRINCIPAL ***");
         System.out.println(" PEOR CASO: " + (peorCaso ? "ON" : "OFF")+(FicheroActual.isBlank() ? " " : "\t\tFichero actual: "+FicheroActual));
-        System.out.println(" 1.- COMPROBAR TODOS LOS FICHEROS");
-        System.out.println(" 2.- COMPROBAR TODAS LAS ESTRATEGIAS");
-        System.out.println(" 3.- ESTUDIAR 1 ESTRATEGIA");
+        System.out.println(" 1.- COMPROBAR TODOS LOS FICHEROS");//AÑADIDO
+        System.out.println(" 2.- COMPROBAR ESTRATEGIAS");
+        System.out.println(" 3.- ESTUDIAR 1 ESTRATEGIA");//AÑADIDO
         System.out.println(" 4.- COMPARAR 2 ESTRATEGIAS");
         System.out.println(" 5.- COMPARAR TODAS LAS ESTRATEGIAS");
-        System.out.println(" 6.- ACTIVAR/DESACTIVAR PEOR CASO (TODOS LOS PUNTOS EN LA MISMA VERTICAL)");
+        System.out.println(" 6.- ACTIVAR/DESACTIVAR PEOR CASO (TODOS LOS PUNTOS EN LA MISMA VERTICAL)");//AÑADIDO
         System.out.println(" 7.- CREAR FICHERO TSP ALEATORIO");
-        System.out.println(" 8.- COMPROBAR TODAS LAS ESTRATEGIAS DE UN FICHERO TSP CONCRETO");
+        System.out.println(" 8.- CARGAR UN DATASER EN MEMORIA");
         System.out.println(" 0.- Salir");
         System.out.println(" ---------");
         System.out.print("Elige opcion: ");
