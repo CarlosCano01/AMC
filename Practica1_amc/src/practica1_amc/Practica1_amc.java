@@ -11,7 +11,7 @@ public class Practica1_amc {
         long inicio,
                 tEx,
                 tPoda,
-                tDyV; //tMejora;
+                tDyV; //tMejora
         AlgoritmoExhaustivo AExhauxtivo = new AlgoritmoExhaustivo();
         LecturaEscritura l = new LecturaEscritura();
         ArrayList<Punto> p;
@@ -42,8 +42,8 @@ public class Practica1_amc {
                     break;
                 case 2:
                     inicio = 0;
-                    long  tiempo1 = 0;
-                     long  tiempo2 = 0;
+                    long tiempo1 = 0;
+                    long tiempo2 = 0;
                     System.out.println("Selecciona el primero: ");
                     int primero = m.menuEstrategias(peorCaso);
                     System.out.println("Selecciona el segundo: ");
