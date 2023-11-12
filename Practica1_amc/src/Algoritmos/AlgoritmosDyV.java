@@ -13,11 +13,13 @@ public class AlgoritmosDyV {
     public static double DyV(ArrayList<Punto> p) {
         ArrayList<Punto> clonP=p;
         AlgoritmoOrdenacion.OrdenaQuickSort(clonP);
-        for (int i = 0; i < clonP.size(); i++) {
-            System.out.println("Nodo " + (i + 1) + ": x = " + clonP.get(i).getX()
-                    + ", y = " + clonP.get(i).getY());
-        }
         return ParesCercanosX(clonP, 0, p.size()-1);
+    }
+     
+    public static double DyVMejorado(ArrayList<Punto> p) {
+        ArrayList<Punto> clonP=p;
+        AlgoritmoOrdenacion.OrdenaQuickSort(clonP);
+        return ParesCercanosY(p, 0, p.size()-1);
     }
 
     private static double ParesCercanosX(ArrayList<Punto> p, int izq, int dcha) {
