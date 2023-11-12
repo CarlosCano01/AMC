@@ -9,11 +9,11 @@ public class Menus {
     private Scanner scanner = new Scanner(System.in);
     private int opcion;
 
-    public int menuPrincipal(boolean peorCaso,String nombreFichero) {
+    public int menuPrincipal(boolean peorCaso) {
         System.out.println(" *** AMC. Practica 1. Curso 23/24 ****");
         System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio VelÃ¡zquez MuÃ±oz");
         System.out.println(" ***     MENU PRINCIPAL ***");
-        System.out.println(" PEOR CASO: " + (peorCaso ? "ON" : "OFF")+(nombreFichero==null ? " ": "\t\tEl fichero cargado es: "+nombreFichero));
+        System.out.println(" PEOR CASO: " + (peorCaso ? "ON" : "OFF"));
         System.out.println(" 1.- COMPROBAR TODOS LOS FICHEROS");
         System.out.println(" 2.- COMPROBAR TODAS LAS ESTRATEGIAS");
         System.out.println(" 3.- ESTUDIAR 1 ESTRATEGIA");

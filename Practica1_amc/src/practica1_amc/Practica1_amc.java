@@ -2,7 +2,6 @@ package practica1_amc;
 
 import Algoritmos.AlgoritmoExhaustivo;
 import Algoritmos.AlgoritmosDyV;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,8 +11,8 @@ public class Practica1_amc {
 
         AlgoritmoExhaustivo AExhauxtivo = new AlgoritmoExhaustivo();
         LecturaEscritura l = new LecturaEscritura();
+        
         ArrayList<String> LitsaFicheros;
-        String NombreFicheroActual=null;
         System.out.println("PEOR CASO");
         ArrayList<Punto> PuntoCoordenadas = l.lectura("archivos/segundo8.tsp");
         System.out.println("MEDIO CASO");
@@ -28,10 +27,15 @@ public class Practica1_amc {
         boolean peorCaso = false;
         int opcion, opcion2,opcion3;
         do {
-            opcion = m.menuPrincipal(peorCaso,NombreFicheroActual);
+            opcion = m.menuPrincipal(peorCaso);
             switch (opcion) {
                 case 1:
-                    
+                    LitsaFicheros=LecturaEscritura.getNombreFicheros();
+                    for (int i = 0; i < LitsaFicheros.size(); i++) {
+                        System.out.println("\n"+LitsaFicheros.get(i));
+                        System.out.println("-----------------\n");
+                        l.lectura("archivos/" + LitsaFicheros.get(i));
+                    }
                     break;
                 case 2:
                     System.out.println("Has seleccionado la opción 2.");
@@ -77,6 +81,37 @@ public class Practica1_amc {
                     break;
                 case 5:
                     System.out.println("Has seleccionado la opción 5.");
+                    System.out.println("Comparar todas las estrategias.");
+                    ArrayList<Punto> p;
+                    long inicio,tEx,tPoda,tDyV; //tMejora;
+
+                    System.out.println("         Exhaustivo   ExhaustivoPoda  DivideVenceras   DyV Mejorado");
+                    System.out.println("Talla   Tiempo(mseg)   Tiempo(mseg)    Tiempo(mseg)     Tiempo(mseg)");
+
+                    for (int i = 100; i <= 700; i += 100) {
+                        p = Punto.rellenarPuntos(i, peorCaso);
+                        inicio = System.nanoTime();
+                        AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
+                        tEx = System.nanoTime();
+                        tEx = tEx - inicio;
+                        
+                        inicio = System.nanoTime();
+                        AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(p);
+                        tPoda = System.nanoTime();
+                        tPoda= tPoda - inicio;
+                        
+                        inicio = System.nanoTime();
+                        AlgoritmosDyV.DyV(p);
+                        tDyV = System.nanoTime();
+                        tDyV = tDyV- inicio;
+                        
+                        /*inicio = System.nanoTime();
+                        AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
+                        tEx = System.nanoTime();
+                        tEx = tEx - inicio;*/
+
+                        System.out.println(i + "     " + tEx + "     " + tPoda + "          " + tDyV + "         " /*+ tMejora*/);
+                    }
                     break;
                 case 6:
                     if (peorCaso == true) {
@@ -103,12 +138,12 @@ public class Practica1_amc {
                             System.out.println("Opción no válida. Por favor, elige una opción válida.1");
                         else
                             try{
-                                NombreFicheroActual=LitsaFicheros.get(opcion-1);
-                                PuntoCoordenadas = l.lectura("archivos/"+NombreFicheroActual);
+                                PuntoCoordenadas = l.lectura("archivos/"+LitsaFicheros.get(opcion-1));
                             }catch(Exception e){
                                 System.out.println("Error al cargar el archivo");
                             }
                     }while(opcion3!=0);
+
                     break;
 
                 case 0:
