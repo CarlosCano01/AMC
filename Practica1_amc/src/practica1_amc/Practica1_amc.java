@@ -42,7 +42,6 @@ public class Practica1_amc {
                     break;
                 case 2:
 
-
                     break;
                 case 3:
                     do {
@@ -81,9 +80,9 @@ public class Practica1_amc {
                     } while (opcion2 != 0);
                     break;
                 case 4:
-                                        inicio = 0;
-                    long  tiempo1 = 0;
-                     long  tiempo2 = 0;
+                    inicio = 0;
+                    long tiempo1 = 0;
+                    long tiempo2 = 0;
                     System.out.println("Selecciona el primero: ");
                     int primero = m.menuEstrategias(peorCaso);
                     System.out.println("Selecciona el segundo: ");

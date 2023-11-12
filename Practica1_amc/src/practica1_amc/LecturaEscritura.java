@@ -196,11 +196,13 @@ public class LecturaEscritura {
             e.printStackTrace();
         }
     }
+
     public static ArrayList<String> getNombreFicheros() {
-                       File carpeta=new File("archivos");
-                       ArrayList<String> listaArchivos=new ArrayList<>();
-                       for(File archivo:carpeta.listFiles())
-                               listaArchivos.add(archivo.getName());
-                       return listaArchivos;
-    } 
+        File carpeta = new File("archivos");
+        ArrayList<String> listaArchivos = new ArrayList<>();
+        for (File archivo : carpeta.listFiles()) {
+            listaArchivos.add(archivo.getName());
+        }
+        return listaArchivos;
+    }
 }
