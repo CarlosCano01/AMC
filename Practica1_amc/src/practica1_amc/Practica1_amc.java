@@ -4,6 +4,7 @@ import Algoritmos.AlgoritmoExhaustivo;
 import Algoritmos.AlgoritmosDyV;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Practica1_amc {
@@ -37,8 +38,8 @@ public class Practica1_amc {
                         System.out.println();
                         System.out.println(fich.getName());
                         System.out.println("-----------------");
-                        ArrayList<Punto> PuntoC = l.lectura(sDirectorio+'/'+fich.getName());
-                        
+                        ArrayList<Punto> PuntoC = l.lectura(sDirectorio + '/' + fich.getName());
+
                     }
                     break;
                 case 2:
@@ -84,7 +85,37 @@ public class Practica1_amc {
                     System.out.println("Has seleccionado la opción 4.");
                     break;
                 case 5:
-                    System.out.println("Has seleccionado la opción 5.");
+                    System.out.println("Comparar todas las estrategias.");
+                    ArrayList<Punto> p;
+                    long inicio,tEx,tPoda,tDyV; //tMejora;
+
+                    System.out.println("         Exhaustivo   ExhaustivoPoda  DivideVenceras   DyV Mejorado");
+                    System.out.println("Talla   Tiempo(mseg)   Tiempo(mseg)    Tiempo(mseg)     Tiempo(mseg)");
+
+                    for (int i = 100; i <= 700; i += 100) {
+                        p = Punto.rellenarPuntos(i, peorCaso);
+                        inicio = System.nanoTime();
+                        AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
+                        tEx = System.nanoTime();
+                        tEx = tEx - inicio;
+                        
+                        inicio = System.nanoTime();
+                        AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(p);
+                        tPoda = System.nanoTime();
+                        tPoda= tPoda - inicio;
+                        
+                        inicio = System.nanoTime();
+                        AlgoritmosDyV.DyV(p);
+                        tDyV = System.nanoTime();
+                        tDyV = tDyV- inicio;
+                        
+                        /*inicio = System.nanoTime();
+                        AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
+                        tEx = System.nanoTime();
+                        tEx = tEx - inicio;*/
+
+                        System.out.println(i + "     " + tEx + "     " + tPoda + "          " + tDyV + "         " /*+ tMejora*/);
+                    }
                     break;
                 case 6:
                     if (peorCaso == true) {
@@ -103,7 +134,6 @@ public class Practica1_amc {
                     LecturaEscritura.crearArchivoTSP(nombre, numero, peorCaso);
                     break;
                 case 8:
-                    System.out.println("Has seleccionado la opción 8.");
 
                     break;
                 case 0:
