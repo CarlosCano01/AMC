@@ -73,4 +73,8 @@ public class Punto {
         return puntos;
     }
 
+    @Override
+    public String toString() {
+        return "("+x+","+y+")";
+    }
 }

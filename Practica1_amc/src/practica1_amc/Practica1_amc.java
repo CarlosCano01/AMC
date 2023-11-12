@@ -14,7 +14,7 @@ public class Practica1_amc {
         String FicheroActual = " ";
         ArrayList<Punto> p;
         ArrayList<String> ListaFicheros;
-        ArrayList<Punto> PuntoCoordenadas = new ArrayList<>();
+        ArrayList<Punto> PuntoCoordenadas=new ArrayList<>();
         System.out.println("MEDIO CASO");
 
         System.out.println("----------------------------------------------------------");
@@ -37,7 +37,30 @@ public class Practica1_amc {
                     }
                     break;
                 case 2:
-
+                    try{
+                        if(PuntoCoordenadas.size()==0){
+                            throw new Exception();
+                        }
+                        System.out.println("Estrategia           Punto1             Punto2              distancia           tiempo(mseg)");
+                        inicio = System.nanoTime();
+                        Resultado r=AlgoritmoExhaustivo.BusquedaExhauxtiva(PuntoCoordenadas);
+                        float tExha =(float) (System.nanoTime() - inicio)/1000000;
+                        System.out.println("Exhaustivo           "+r.getPunto1()+"      "+r.getPunto2()+"   "+r.getDistancia()+"      "+tExha);
+                        inicio = System.nanoTime();
+                        r=AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(PuntoCoordenadas);
+                        float tPo =(float) (System.nanoTime() - inicio)/1000000;
+                        System.out.println("Exhaustivo Poda       "+r.getPunto1()+"      "+r.getPunto2()+"   "+r.getDistancia()+"    "+tPo);
+                        inicio = System.nanoTime();
+                        r=AlgoritmosDyV.DyV(PuntoCoordenadas);
+                        float tDiyVi =(float) (System.nanoTime() - inicio)/1000000;
+                        System.out.println("Divide y Venceras       "+r.getPunto1()+"      "+r.getPunto2()+"   "+r.getDistancia()+"       "+tDiyVi);
+                        inicio = System.nanoTime();
+                        r=AlgoritmosDyV.DyVMejorado(PuntoCoordenadas);
+                        float tMejorado =(float) (System.nanoTime() - inicio)/1000000;
+                        System.out.println("Divide y Venceras   Mejorado       "+r.getPunto1()+"      "+r.getPunto2()+"   "+r.getDistancia()+"     "+tMejorado);
+                    }catch(Exception e){
+                        System.out.println("ERROR: Carga un fichero");
+                    }
                     break;
                 case 3:
                     do {
@@ -52,10 +75,6 @@ public class Practica1_amc {
                                 // Lógica para la opción 2 (ExhaustivoPoda)
                                 System.out.println("Has seleccionado la opción 2 (ExhaustivoPoda).");
                                 AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(PuntoCoordenadas);
-                                for (int i = 0; i < PuntoCoordenadas.size(); i++) {
-                                    System.out.println("Nodo " + (i + 1) + ": x = " + PuntoCoordenadas.get(i).getX()
-                                            + ", y = " + PuntoCoordenadas.get(i).getY());
-                                }
                                 break;
                             case 3:
                                 // Lógica para la opción 3 (DivideVenceras)
@@ -65,6 +84,7 @@ public class Practica1_amc {
                             case 4:
                                 // Lógica para la opción 4 (DyV Mejorado)
                                 System.out.println("Has seleccionado la opción 4 (DyV Mejorado).");
+                                AlgoritmosDyV.DyVMejorado(PuntoCoordenadas);
                                 break;
                             case 0:
                                 System.out.println("Volviendo al menu anterior.");
