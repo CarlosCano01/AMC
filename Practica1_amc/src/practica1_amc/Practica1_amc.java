@@ -8,18 +8,14 @@ import java.util.Scanner;
 public class Practica1_amc {
 
     public static void main(String[] args) {
-        long inicio,
-                tEx,
-                tPoda,
-                tDyV; //tMejora
+        long inicio;
         AlgoritmoExhaustivo AExhauxtivo = new AlgoritmoExhaustivo();
         LecturaEscritura l = new LecturaEscritura();
+        String FicheroActual = " ";
         ArrayList<Punto> p;
-        ArrayList<String> LitsaFicheros;
-        System.out.println("PEOR CASO");
-        ArrayList<Punto> PuntoCoordenadas = l.lectura("archivos/segundo8.tsp");
+        ArrayList<String> ListaFicheros;
+        ArrayList<Punto> PuntoCoordenadas = new ArrayList<>();
         System.out.println("MEDIO CASO");
-        ArrayList<Punto> PuntoCoordenadas2 = l.lectura("archivos/tercero8.tsp");
 
         System.out.println("----------------------------------------------------------");
 
@@ -30,14 +26,14 @@ public class Practica1_amc {
         boolean peorCaso = false;
         int opcion, opcion2, opcion3;
         do {
-            opcion = m.menuPrincipal(peorCaso);
+            opcion = m.menuPrincipal(peorCaso, FicheroActual);
             switch (opcion) {
                 case 1:
-                    LitsaFicheros = LecturaEscritura.getNombreFicheros();
-                    for (int i = 0; i < LitsaFicheros.size(); i++) {
-                        System.out.println("\n" + LitsaFicheros.get(i));
+                    ListaFicheros = LecturaEscritura.getNombreFicheros();
+                    for (int i = 0; i < ListaFicheros.size(); i++) {
+                        System.out.println("\n" + ListaFicheros.get(i));
                         System.out.println("-----------------\n");
-                        l.lectura("archivos/" + LitsaFicheros.get(i));
+                        l.lectura("archivos/" + ListaFicheros.get(i));
                     }
                     break;
                 case 2:
@@ -114,11 +110,11 @@ public class Practica1_amc {
                                 System.out.print(" PRIMERA: DyV ");
                                 break;
                             case 4:
-                                /*inicio = System.nanoTime();
-                        AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
-                        tiempo1= System.nanoTime();
-                        tiempo1 = tiempo1 - inicio;
-                        System.out.print(" PRIMERA: DyV mejorado ");*/
+                                inicio = System.nanoTime();
+                                AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
+                                tiempo1 = System.nanoTime();
+                                tiempo1 = tiempo1 - inicio;
+                                System.out.print(" PRIMERA: DyV mejorado ");
                                 break;
                             default:
                                 System.out.println("Opción no válida. Introduce un número válido.");
@@ -150,11 +146,11 @@ public class Practica1_amc {
                                 System.out.println(" SEGUNDA: DyV ");
                                 break;
                             case 4:
-                                /*inicio = System.nanoTime();
-                            AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
-                            tiempo1= System.nanoTime();
-                             tiempo1 = tiempo1 - inicio;
-                                System.out.println(" SEGUNDA: DyV mejorado ");*/
+                                inicio = System.nanoTime();
+                                AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
+                                tiempo1 = System.nanoTime();
+                                tiempo1 = tiempo1 - inicio;
+                                System.out.println(" SEGUNDA: DyV mejorado ");
                                 break;
                             default:
                                 System.out.println("Opción no válida. Introduce un número válido.");
@@ -171,28 +167,33 @@ public class Practica1_amc {
                     System.out.println("         Exhaustivo   ExhaustivoPoda  DivideVenceras   DyV Mejorado");
                     System.out.println("Talla   Tiempo(mseg)   Tiempo(mseg)    Tiempo(mseg)     Tiempo(mseg)");
 
-                    for (int i = 100; i <= 700; i += 100) {
-                        p = Punto.rellenarPuntos(i, peorCaso);
-                        inicio = System.nanoTime();
-                        AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
-                        tEx = System.nanoTime();
-                        tEx = tEx - inicio;
+                    for (int i = 1000; i <= 5000; i += 1000) {
+                        float tEx = 0, tPoda = 0, tDyV = 0, tMejora = 0;
+                        for (int j = 0; j < 100; j++) {
 
-                        inicio = System.nanoTime();
-                        AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(p);
-                        tPoda = System.nanoTime();
-                        tPoda = tPoda - inicio;
+                            p = Punto.rellenarPuntos(i, peorCaso);
 
-                        inicio = System.nanoTime();
-                        AlgoritmosDyV.DyV(p);
-                        tDyV = System.nanoTime();
-                        tDyV = tDyV - inicio;
+                            inicio = System.nanoTime();
+                            AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
+                            tEx = System.nanoTime() - inicio;
 
-                        /*inicio = System.nanoTime();
-                        AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
-                        tEx = System.nanoTime();
-                        tEx = tEx - inicio;*/
-                        System.out.println(i + "     " + tEx + "     " + tPoda + "          " + tDyV + "         " /*+ tMejora*/);
+                            inicio = System.nanoTime();
+                            AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(p);
+                            tPoda = System.nanoTime() - inicio;
+
+                            inicio = System.nanoTime();
+                            AlgoritmosDyV.DyV(p);
+                            tDyV = System.nanoTime() - inicio;
+
+                            inicio = System.nanoTime();
+                            AlgoritmoExhaustivo.BusquedaExhauxtiva(p);
+                            tMejora = System.nanoTime() - inicio;
+                        }
+                        tEx = (float) tEx / 100000000;
+                        tPoda = (float) tPoda / 100000000;
+                        tDyV = (float) tDyV / 100000000;
+                        tMejora = (float) tMejora / 100000000;
+                        System.out.println(i + "     " + tEx + "      " + tPoda + "        " + tDyV + "         " + tMejora);
                     }
                     break;
                 case 6:
@@ -214,15 +215,18 @@ public class Practica1_amc {
                 case 8:
                     System.out.println("Has seleccionado la opción 8.");
                     do {
-                        LitsaFicheros = LecturaEscritura.getNombreFicheros();
-                        opcion3 = m.menuFicheros(LitsaFicheros);
+                        ListaFicheros = LecturaEscritura.getNombreFicheros();
+                        opcion3 = m.menuFicheros(ListaFicheros);
                         if (opcion3 == -1) {
                             System.out.println("Opción no válida. Por favor, elige una opción válida.1");
-                        } else
+                        } else {
                             try {
-                            PuntoCoordenadas = l.lectura("archivos/" + LitsaFicheros.get(opcion - 1));
-                        } catch (Exception e) {
-                            System.out.println("Error al cargar el archivo");
+                                int i=opcion3 - 1; 
+                                FicheroActual = ListaFicheros.get(i);
+                                PuntoCoordenadas = l.lectura("archivos/" + FicheroActual);
+                            } catch (Exception e) {
+                               System.out.println("Error al cargar el archivo");
+                            }
                         }
                     } while (opcion3 != 0);
 
@@ -236,8 +240,7 @@ public class Practica1_amc {
                     break;
             }
 
-        } while (opcion
-                != 0);
+        } while (opcion!= 0);
 
     }
 

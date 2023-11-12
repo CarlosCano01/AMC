@@ -29,7 +29,7 @@ public class AlgoritmosDyV {
             for (int i = izq; i < dcha+1 ; i++) {
                 Pcercanos.add(p.get(i));
             }
-            return AlgoritmoExhaustivo.BusquedaExhauxtiva(Pcercanos);
+            return AlgoritmoExhaustivo.BusquedaExhauxtiva(Pcercanos).getDistancia();
         }
 
         int mid = (izq + dcha) / 2;
@@ -52,7 +52,7 @@ public class AlgoritmosDyV {
             for (int i = izq; i < dcha+1 ; i++) {
                 Pcercanos.add(p.get(i));
             }
-            return AlgoritmoExhaustivo.BusquedaExhauxtiva(Pcercanos);
+            return AlgoritmoExhaustivo.BusquedaExhauxtiva(Pcercanos).getDistancia();
         }
 
         int mid = (izq + dcha) / 2;

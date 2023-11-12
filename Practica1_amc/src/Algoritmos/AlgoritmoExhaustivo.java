@@ -6,12 +6,13 @@ package Algoritmos;
 
 import java.util.ArrayList;
 import practica1_amc.Punto;
+import practica1_amc.Resultado;
 
 
 public class AlgoritmoExhaustivo {
 
     
-    public static double BusquedaExhauxtiva(ArrayList<Punto> p){
+    public static Resultado BusquedaExhauxtiva(ArrayList<Punto> p){
         Punto p1=null;
         Punto p2=null;
         double distanciaMin = Double.MAX_VALUE;
@@ -25,14 +26,11 @@ public class AlgoritmoExhaustivo {
                 }
             }
         }
-        System.out.println("Punto m�s cercano 1: (" + p1.getX() + ", " + p1.getY() + ")");
-        System.out.println("Punto m�s cercano 2: (" + p2.getX()+ ", " + p2.getY() + ")");
-        System.out.println("Distancia m�nima: " + distanciaMin);
-        
-        return distanciaMin;
+        Resultado resultado=new Resultado(p1,p2,distanciaMin);
+        return resultado;
     }
     
-    public static void BusquedaExhauxtivaPoda(ArrayList<Punto> p){
+    public static Resultado BusquedaExhauxtivaPoda(ArrayList<Punto> p){
         ArrayList<Punto> clonP=p;
         AlgoritmoOrdenacion.OrdenaQuickSortX(clonP);
         
@@ -55,10 +53,7 @@ public class AlgoritmoExhaustivo {
                 }
             }
         }
-
-        
-        System.out.println("Punto m�s cercano 1: (" + p1.getX() + ", " + p1.getY() + ")");
-        System.out.println("Punto m�s cercano 2: (" + p2.getX()+ ", " + p2.getY() + ")");
-        System.out.println("Distancia m�nima: " + distanciaMin);
+        Resultado resultado=new Resultado(p1,p2,distanciaMin);
+        return resultado;
     }
 }
