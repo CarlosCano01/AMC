@@ -12,9 +12,8 @@ public class Practica1_amc {
 
         AlgoritmoExhaustivo AExhauxtivo = new AlgoritmoExhaustivo();
         LecturaEscritura l = new LecturaEscritura();
-        String sDirectorio = "./archivos";
-        File darchivos = new File(sDirectorio);
-        String NombreFicheroActual;
+        ArrayList<String> LitsaFicheros;
+        String NombreFicheroActual=null;
         System.out.println("PEOR CASO");
         ArrayList<Punto> PuntoCoordenadas = l.lectura("archivos/segundo8.tsp");
         System.out.println("MEDIO CASO");
@@ -27,35 +26,28 @@ public class Practica1_amc {
         Menus m = new Menus();
 
         boolean peorCaso = false;
-        int opcion, opcion2;
+        int opcion, opcion2,opcion3;
         do {
-            opcion = m.menuPrincipal(peorCaso);
+            opcion = m.menuPrincipal(peorCaso,NombreFicheroActual);
             switch (opcion) {
                 case 1:
-                    File[] ficheros = darchivos.listFiles();
-                    for (File fich : ficheros) {
-                        System.out.println();
-                        System.out.println(fich.getName());
-                        System.out.println("-----------------");
-                        ArrayList<Punto> PuntoC = l.lectura(sDirectorio+'/'+fich.getName());
-                        
-                    }
+                    
                     break;
                 case 2:
-                    System.out.println("Has seleccionado la opci髇 2.");
+                    System.out.println("Has seleccionado la opci贸n 2.");
                     break;
                 case 3:
                     do {
                         opcion2 = m.menuEstrategias(peorCaso);
                         switch (opcion2) {
                             case 1:
-                                // L骻ica para la opci髇 1 (Exhaustivo)
-                                System.out.println("Has seleccionado la opci髇 1 (Exhaustivo).");
+                                // L贸gica para la opci贸n 1 (Exhaustivo)
+                                System.out.println("Has seleccionado la opci贸n 1 (Exhaustivo).");
                                 AlgoritmoExhaustivo.BusquedaExhauxtiva(PuntoCoordenadas);
                                 break;
                             case 2:
-                                // L骻ica para la opci髇 2 (ExhaustivoPoda)
-                                System.out.println("Has seleccionado la opci髇 2 (ExhaustivoPoda).");
+                                // L贸gica para la opci贸n 2 (ExhaustivoPoda)
+                                System.out.println("Has seleccionado la opci贸n 2 (ExhaustivoPoda).");
                                 AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(PuntoCoordenadas);
                                 for (int i = 0; i < PuntoCoordenadas.size(); i++) {
                                     System.out.println("Nodo " + (i + 1) + ": x = " + PuntoCoordenadas.get(i).getX()
@@ -63,28 +55,28 @@ public class Practica1_amc {
                                 }
                                 break;
                             case 3:
-                                // L骻ica para la opci髇 3 (DivideVenceras)
-                                System.out.println("Has seleccionado la opci髇 3 (DivideVenceras).");
+                                // L贸gica para la opci贸n 3 (DivideVenceras)
+                                System.out.println("Has seleccionado la opci贸n 3 (DivideVenceras).");
                                 AlgoritmosDyV.DyV(PuntoCoordenadas);
                                 break;
                             case 4:
-                                // L骻ica para la opci髇 4 (DyV Mejorado)
-                                System.out.println("Has seleccionado la opci髇 4 (DyV Mejorado).");
+                                // L贸gica para la opci贸n 4 (DyV Mejorado)
+                                System.out.println("Has seleccionado la opci贸n 4 (DyV Mejorado).");
                                 break;
                             case 0:
                                 System.out.println("Volviendo al menu anterior.");
                                 break;
                             default:
-                                System.out.println("Opci髇 no v醠ida. Por favor, elige una opci髇 v醠ida.");
+                                System.out.println("Opci贸n no v谩lida. Por favor, elige una opci贸n v谩lida.");
                                 break;
                         }
                     } while (opcion2 != 0);
                     break;
                 case 4:
-                    System.out.println("Has seleccionado la opci髇 4.");
+                    System.out.println("Has seleccionado la opci贸n 4.");
                     break;
                 case 5:
-                    System.out.println("Has seleccionado la opci髇 5.");
+                    System.out.println("Has seleccionado la opci贸n 5.");
                     break;
                 case 6:
                     if (peorCaso == true) {
@@ -103,14 +95,27 @@ public class Practica1_amc {
                     LecturaEscritura.crearArchivoTSP(nombre, numero, peorCaso);
                     break;
                 case 8:
-                    System.out.println("Has seleccionado la opci髇 8.");
-
+                    System.out.println("Has seleccionado la opci贸n 8.");
+                    do{
+                        LitsaFicheros=LecturaEscritura.getNombreFicheros();
+                        opcion3=m.menuFicheros(LitsaFicheros);
+                        if(opcion3==-1)
+                            System.out.println("Opci贸n no v谩lida. Por favor, elige una opci贸n v谩lida.1");
+                        else
+                            try{
+                                NombreFicheroActual=LitsaFicheros.get(opcion-1);
+                                PuntoCoordenadas = l.lectura("archivos/"+NombreFicheroActual);
+                            }catch(Exception e){
+                                System.out.println("Error al cargar el archivo");
+                            }
+                    }while(opcion3!=0);
                     break;
+
                 case 0:
-                    System.out.println("Saliendo del programa. asta luego!");
+                    System.out.println("Saliendo del programa. 隆Hasta luego!");
                     break;
                 default:
-                    System.out.println("Opci髇 no v醠ida. Por favor, elige una opci髇 v醠ida.");
+                    System.out.println("Opci贸n no v谩lida. Por favor, elige una opci贸n v谩lida.");
                     break;
             }
 

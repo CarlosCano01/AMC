@@ -15,6 +15,12 @@ public class Punto {
     private double y;
     private int numeracion;
 
+    Punto(double parseDouble, double parseDouble0, int i) {
+        this.x = x;
+        this.y = y;
+        this.numeracion=i;
+    }
+
     public int getNumeracion() {
         return numeracion;
     }
