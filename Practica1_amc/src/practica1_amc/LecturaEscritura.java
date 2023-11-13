@@ -83,7 +83,7 @@ public class LecturaEscritura {
             int num, den;
             double y, x, aux1;
             for (int i = 1; i <= n; i++) {
-                if (!caso) {
+                if (caso) {
                     aux1 = random.nextInt(1000) + 7; //7 y 1007
                     y = (int) (aux1 / ((double) i + 1 + i * 0.100)); //aux2; //+(i/3.0)
                     x = 1;

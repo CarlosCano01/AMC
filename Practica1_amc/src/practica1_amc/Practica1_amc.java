@@ -270,13 +270,13 @@ public class Practica1_amc {
                                     opcion3 = m.menuFicheros(ListaFicheros);
                                     if (opcion3 == -1) {
                                         System.out.println("Opción no válida. Por favor, elige una opción válida.1");
-                                    } else {
+                                    }else if(opcion3>0) {
                                         try {
                                             int i = opcion3 - 1;
                                             FicheroActual = ListaFicheros.get(i);
                                             PuntoCoordenadas = l.lectura("archivos/" + FicheroActual);
                                         } catch (Exception e) {
-                                            System.out.println("Error al cargar el archivo");
+                                            //System.out.println("Error al cargar el archivo");
                                         }
                                     }
                                 } while (opcion3 != 0);
