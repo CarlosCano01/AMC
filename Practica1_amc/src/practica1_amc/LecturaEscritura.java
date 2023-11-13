@@ -112,7 +112,6 @@ public class LecturaEscritura {
         try {
             String carpeta = "archivosvoraz";
             String nombrecompleto=archivo.substring(0, archivo.lastIndexOf('.'));
-            System.out.println("ESTEEE "+nombrecompleto);
             String rutacompleta = carpeta + "/" +nombrecompleto+ "opt.tour";
             BufferedWriter writer = new BufferedWriter(new FileWriter(rutacompleta));
             writer.write("NAME : " + archivo);
@@ -153,7 +152,7 @@ public class LecturaEscritura {
 
             writer.write("EOF");
             writer.close();
-            System.out.println("Archivo " + archivo + " creado con éxito.");
+            //System.out.println("Archivo " + archivo + " creado con éxito.");
         } catch (IOException e) {
             e.printStackTrace();
         }

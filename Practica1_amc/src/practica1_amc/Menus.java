@@ -12,7 +12,7 @@ public class Menus {
     
     public int menuPrincipal() {
         System.out.println(" *** AMC. Practica 1. Curso 23/24 ****");
-        System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio VelÃ¡zquez MuÃ±oz");
+        System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio Velazquez Muñoz");
         System.out.println(" ***     MENU PRINCIPAL    ***");
         System.out.println(" 1.- MENU DYV y EXHAUSTIVO ");
         System.out.println(" 2.- MENU VORAZ");
@@ -26,7 +26,7 @@ public class Menus {
     
     public int menuPrincipal1A(boolean peorCaso,String FicheroActual) {
         System.out.println(" *** AMC. Practica 1. Curso 23/24 ****");
-        System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio VelÃ¡zquez MuÃ±oz");
+        System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio Velazquez Muñoz");
         System.out.println(" ***     MENU PRINCIPAL DYV y EXHAUSTIVO   ***");
         System.out.println(" PEOR CASO: " + (peorCaso ? "ON" : "OFF")+(FicheroActual.isBlank() ? " " : "\t\tFichero actual: "+FicheroActual));
         System.out.println(" 1.- COMPROBAR TODOS LOS FICHEROS");//AÑADIDO
@@ -47,7 +47,7 @@ public class Menus {
     
     public int menuPrincipal1B(String FicheroActual) {
         System.out.println(" *** AMC. Practica 1. Curso 23/24 ****");
-        System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio VelÃ¡zquez MuÃ±oz");
+        System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio Velazquez Muñoz");
         System.out.println(" ***     MENU PRINCIPAL VORAZ ***");
         System.out.println((FicheroActual.isBlank() ? " " : "\t\tFichero actual: "+FicheroActual));
         System.out.println(" 1.- CARGAR UN DATASER EN MEMORIA");

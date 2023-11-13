@@ -11,7 +11,6 @@ public class AlgoritmosVoraces {
     public static Resultado Unidireccional(ArrayList<Punto> nodos, String archivo) {
         ArrayList<Punto> nodoNoVisitados = new ArrayList<>(nodos);
         ArrayList<Punto> ruta = new ArrayList<>();
-        
 
         Punto puntoActual = nodoNoVisitados.get(0);
         ruta.add(puntoActual);
@@ -29,7 +28,6 @@ public class AlgoritmosVoraces {
                 }
             }
 
-            
             ruta.add(nodoMasCercano);
             nodoNoVisitados.remove(nodoMasCercano);
             puntoActual = nodoMasCercano;
@@ -39,20 +37,18 @@ public class AlgoritmosVoraces {
         for (int i = 0; i < ruta.size() - 1; i++) {
             distancia += ruta.get(i).distancia(ruta.get(i + 1));
         }
-        distancia += ruta.get(ruta.size() - 1).distancia(ruta.get(0)); 
+        distancia += ruta.get(ruta.size() - 1).distancia(ruta.get(0));
 
-        Resultado resultados = new Resultado(distancia,ruta);
+        Resultado resultados = new Resultado(distancia, ruta);
 
-        
         if (archivo != null && archivo != "Test") {
-            LecturaEscritura.crearArchivoTSPvoraz(ruta, resultados.getDistancia(),"uni_"+archivo + ".tour");
+            LecturaEscritura.crearArchivoTSPvoraz(ruta, resultados.getDistancia(), "uni_" + archivo + ".tour");
         }
-    
-        
+
         return resultados;
     }
 
-        public static Resultado Bidireccional(ArrayList<Punto> nodos, String archivo) {
+    public static Resultado Bidireccional(ArrayList<Punto> nodos, String archivo) {
         ArrayList<Punto> nodosNoVisitados = new ArrayList<>(nodos);
         ArrayList<Punto> ladoIzquierdo = new ArrayList<>();
         ArrayList<Punto> ladoDerecho = new ArrayList<>();
@@ -61,7 +57,6 @@ public class AlgoritmosVoraces {
         ladoIzquierdo.add(puntoIzquierdo);
         nodosNoVisitados.remove(0);
 
- 
         Punto puntoDerecho = nodosNoVisitados.get(0);
         ladoDerecho.add(puntoDerecho);
         nodosNoVisitados.remove(0);
@@ -71,7 +66,6 @@ public class AlgoritmosVoraces {
             Punto puntoMasCercanoIzquierdo = null;
             double distanciaMinimaIzquierda = Double.MAX_VALUE;
 
-    
             Punto puntoMasCercanoDerecho = null;
             double distanciaMinimaDerecha = Double.MAX_VALUE;
 
@@ -100,25 +94,21 @@ public class AlgoritmosVoraces {
             }
         }
 
-
         ArrayList<Punto> rutaBidireccional = new ArrayList<>(ladoIzquierdo);
         Collections.reverse(ladoDerecho);
         rutaBidireccional.addAll(ladoDerecho);
-
 
         double distanciaRecorrida = 0;
         for (int i = 0; i < rutaBidireccional.size() - 1; i++) {
             distanciaRecorrida += rutaBidireccional.get(i).distancia(rutaBidireccional.get(i + 1));
         }
-        distanciaRecorrida += rutaBidireccional.get(rutaBidireccional.size() - 1).distancia(rutaBidireccional.get(0)); 
+        distanciaRecorrida += rutaBidireccional.get(rutaBidireccional.size() - 1).distancia(rutaBidireccional.get(0));
 
-        Resultado resultados = new Resultado(distanciaRecorrida,rutaBidireccional);
-
+        Resultado resultados = new Resultado(distanciaRecorrida, rutaBidireccional);
 
         if (archivo != null && archivo != "Test") {
-            LecturaEscritura.crearArchivoTSPvoraz(rutaBidireccional, resultados.getDistancia(), "bi_"+archivo + ".tour");
+            LecturaEscritura.crearArchivoTSPvoraz(rutaBidireccional, resultados.getDistancia(), "bi_" + archivo + ".tour");
         }
-        
 
         return resultados;
     }

@@ -44,19 +44,19 @@ public class Practica1_amc {
                                 inicio = System.nanoTime();
                                 Resultado r = AlgoritmoExhaustivo.BusquedaExhauxtiva(PuntoCoordenadas);
                                 float tExha = (float) (System.nanoTime() - inicio) / 1000000;
-                                System.out.println("Exhaustivo           " + r.getPunto1() + "      " + r.getPunto2() + "   " + r.getDistancia() + "      " + tExha);
+                                System.out.println("Exhaustivo           " + r.getPunto1() + "      " + r.getPunto2() + "      " + r.getDistancia() + "      " + tExha);
                                 inicio = System.nanoTime();
                                 r = AlgoritmoExhaustivo.BusquedaExhauxtivaPoda(PuntoCoordenadas);
                                 float tPo = (float) (System.nanoTime() - inicio) / 1000000;
-                                System.out.println("Exhaustivo Poda       " + r.getPunto1() + "      " + r.getPunto2() + "   " + r.getDistancia() + "    " + tPo);
+                                System.out.println("Exhaustivo Poda       " + r.getPunto1() + "      " + r.getPunto2() + "       " + r.getDistancia() + "     " + tPo);
                                 inicio = System.nanoTime();
                                 r = AlgoritmosDyV.DyV(PuntoCoordenadas);
                                 float tDiyVi = (float) (System.nanoTime() - inicio) / 1000000;
-                                System.out.println("Divide y Venceras       " + r.getPunto1() + "      " + r.getPunto2() + "   " + r.getDistancia() + "       " + tDiyVi);
+                                System.out.println("Divide y Venceras     " + r.getPunto1() + "      " + r.getPunto2() + "      " + r.getDistancia() + "      " + tDiyVi);
                                 inicio = System.nanoTime();
                                 r = AlgoritmosDyV.DyVMejorado(PuntoCoordenadas);
                                 float tMejorado = (float) (System.nanoTime() - inicio) / 1000000;
-                                System.out.println("Divide y Venceras   Mejorado       " + r.getPunto1() + "      " + r.getPunto2() + "   " + r.getDistancia() + "     " + tMejorado);
+                                System.out.println("DyVMejorado          " + r.getPunto1() + "       " + r.getPunto2() + "       " + r.getDistancia() + "      " + tMejorado);
                             } catch (Exception e) {
                                 System.out.println("ERROR: Carga un fichero");
                             }
@@ -319,28 +319,28 @@ public class Practica1_amc {
                                 if (PuntoCoordenadas.isEmpty()) {
                                     throw new Exception();
                                 }
-                                System.out.println("Estrategia           Ruta                                                                 distancia                            tiempo(mseg)");
+                                System.out.println("Estrategia           Ruta                                                                                                  distancia                  tiempo(mseg)");
                                 inicio = System.nanoTime();
                                 Resultado r = AlgoritmosVoraces.Unidireccional(PuntoCoordenadas, FicheroActual);
                                 float tuni = (float) (System.nanoTime() - inicio) / 1000000;
-                                System.out.print("Unidireccional           ");
+                                System.out.print("Unidireccional         ");
 
                                 for (int i = 0; i < r.getRuta().size(); i++) {
                                     System.out.print("" + r.getRuta().get(i) + ",");
                                 }
                                 System.out.print("    " + r.getDistancia());
-                                System.out.println(" " + tuni);
+                                System.out.println("           " + tuni);
 
                                 inicio = System.nanoTime();
                                 r = AlgoritmosVoraces.Bidireccional(PuntoCoordenadas, FicheroActual);
                                 float tbi = (float) (System.nanoTime() - inicio) / 1000000;
-                                System.out.print("Bidireccional           ");
+                                System.out.print("Bidireccional         ");
 
                                 for (int i = 0; i < r.getRuta().size(); i++) {
                                     System.out.print("" + r.getRuta().get(i) + ",");
                                 }
                                 System.out.print("    " + r.getDistancia());
-                                System.out.println(" " + tbi);
+                                System.out.println("           " + tbi);
 
                             } catch (Exception e) {
                                 System.out.println("ERROR: Carga un fichero");
