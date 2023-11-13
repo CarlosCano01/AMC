@@ -9,10 +9,25 @@ public class Menus {
     private Scanner scanner = new Scanner(System.in);
     private int opcion;
 
-    public int menuPrincipal(boolean peorCaso,String FicheroActual) {
+    
+    public int menuPrincipal() {
         System.out.println(" *** AMC. Practica 1. Curso 23/24 ****");
         System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio VelÃ¡zquez MuÃ±oz");
-        System.out.println(" ***     MENU PRINCIPAL ***");
+        System.out.println(" ***     MENU PRINCIPAL    ***");
+        System.out.println(" 1.- MENU DYV y EXHAUSTIVO ");
+        System.out.println(" 2.- MENU VORAZ");
+        System.out.println(" 0.- Salir");
+        System.out.println(" ---------");
+        System.out.print("Elige opcion: ");
+
+        opcion = scanner.nextInt();
+        return opcion;
+    }
+    
+    public int menuPrincipal1A(boolean peorCaso,String FicheroActual) {
+        System.out.println(" *** AMC. Practica 1. Curso 23/24 ****");
+        System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio VelÃ¡zquez MuÃ±oz");
+        System.out.println(" ***     MENU PRINCIPAL DYV y EXHAUSTIVO   ***");
         System.out.println(" PEOR CASO: " + (peorCaso ? "ON" : "OFF")+(FicheroActual.isBlank() ? " " : "\t\tFichero actual: "+FicheroActual));
         System.out.println(" 1.- COMPROBAR TODOS LOS FICHEROS");//AÑADIDO
         System.out.println(" 2.- COMPROBAR ESTRATEGIAS");
@@ -29,6 +44,25 @@ public class Menus {
         opcion = scanner.nextInt();
         return opcion;
     }
+    
+    public int menuPrincipal1B(String FicheroActual) {
+        System.out.println(" *** AMC. Practica 1. Curso 23/24 ****");
+        System.out.println(" Alumnos: Carlos Cano Espinosa y Ignacio VelÃ¡zquez MuÃ±oz");
+        System.out.println(" ***     MENU PRINCIPAL VORAZ ***");
+        System.out.println((FicheroActual.isBlank() ? " " : "\t\tFichero actual: "+FicheroActual));
+        System.out.println(" 1.- CARGAR UN DATASER EN MEMORIA");
+        System.out.println(" 2.- COMPROBAR ESTRATEGIAS");
+        System.out.println(" 3.- COMPARAR LAS ESTRATEGIAS ");
+        System.out.println(" 4.- CREAR FICHERO TSP ALEATORIO");
+        System.out.println(" 0.- Salir");
+        System.out.println(" ---------");
+        System.out.print("Elige opcion: ");
+
+        opcion = scanner.nextInt();
+        return opcion;
+    }
+    
+    
 
     public int menuEstrategias(boolean peorCaso) {
         
