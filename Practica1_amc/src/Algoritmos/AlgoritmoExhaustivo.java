@@ -56,4 +56,5 @@ public class AlgoritmoExhaustivo {
         Resultado resultado=new Resultado(p1,p2,distanciaMin);
         return resultado;
     }
+    
 }

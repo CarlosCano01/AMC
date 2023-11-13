@@ -108,7 +108,7 @@ public class LecturaEscritura {
         }
     }
 
-    public void crearArchivoTSPuni(ArrayList<Punto> ruta, double distancia, String archivo) {
+    public static void crearArchivoTSPuni(ArrayList<Punto> ruta, double distancia, String archivo) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(archivo));
             writer.write("NAME : " + archivo);
@@ -155,7 +155,7 @@ public class LecturaEscritura {
         }
     }
 
-    public void crearArchivoTSPbi(ArrayList<Punto> ruta, String archivo, double coste) {
+    public static void crearArchivoTSPbi(ArrayList<Punto> ruta, double coste, String archivo) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(archivo));
 

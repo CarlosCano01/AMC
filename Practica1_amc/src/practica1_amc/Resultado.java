@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Resultado {
     private Punto punto1, punto2;
     private double distancia;
-    private ArrayList<Punto> ruta; // Campo para almacenar el camino completo
+    private ArrayList<Punto> ruta; // Campo para almacenar el ruta completo
 
     public Resultado(Punto punto1, Punto punto2, double distancia) {
         this.punto1 = punto1;
@@ -21,6 +21,11 @@ public class Resultado {
         this.distancia = distancia;
     }
 
+    public Resultado(double distancia, ArrayList<Punto> ruta) {
+        this.distancia = distancia;
+        this.ruta = ruta;
+    }
+    
     public Punto getPunto1() {
         return punto1;
     }
@@ -49,8 +54,8 @@ public class Resultado {
         return ruta;
     }
 
-    public void setCamino(ArrayList<Punto> camino) {
-        this.ruta = camino;
+    public void setCamino(ArrayList<Punto> ruta) {
+        this.ruta = ruta;
     }
     
     @Override

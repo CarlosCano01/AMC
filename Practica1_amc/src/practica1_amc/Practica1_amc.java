@@ -15,9 +15,6 @@ public class Practica1_amc {
         ArrayList<Punto> p;
         ArrayList<String> ListaFicheros;
         ArrayList<Punto> PuntoCoordenadas = new ArrayList<>();
-        System.out.println("MEDIO CASO");
-
-        System.out.println("----------------------------------------------------------");
 
         Scanner scanner = new Scanner(System.in);
 

@@ -6,7 +6,6 @@ package practica1_amc;
 
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 
