@@ -50,11 +50,11 @@ public class Resultado {
         this.distancia = distancia;
     }
 
-    public ArrayList<Punto> getCamino() {
+    public ArrayList<Punto> getRuta() {
         return ruta;
     }
 
-    public void setCamino(ArrayList<Punto> ruta) {
+    public void setRuta(ArrayList<Punto> ruta) {
         this.ruta = ruta;
     }
     

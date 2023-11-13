@@ -44,15 +44,15 @@ public class AlgoritmosVoraces {
         Resultado resultados = new Resultado(distancia,ruta);
 
         
-        if (archivo != null) {
-            LecturaEscritura.crearArchivoTSPuni(ruta, resultados.getDistancia(),"bi_"+archivo + ".tour");
+        if (archivo != null && archivo != "Test") {
+            LecturaEscritura.crearArchivoTSPvoraz(ruta, resultados.getDistancia(),"uni_"+archivo + ".tour");
         }
     
         
         return resultados;
     }
 
-        public static Resultado busquedaVorazBidireccional(ArrayList<Punto> nodos, String archivo) {
+        public static Resultado Bidireccional(ArrayList<Punto> nodos, String archivo) {
         ArrayList<Punto> nodosNoVisitados = new ArrayList<>(nodos);
         ArrayList<Punto> ladoIzquierdo = new ArrayList<>();
         ArrayList<Punto> ladoDerecho = new ArrayList<>();
@@ -115,8 +115,8 @@ public class AlgoritmosVoraces {
         Resultado resultados = new Resultado(distanciaRecorrida,rutaBidireccional);
 
 
-        if (archivo != null) {
-            LecturaEscritura.crearArchivoTSPbi(rutaBidireccional, resultados.getDistancia(), "bi_"+archivo + ".tour");
+        if (archivo != null && archivo != "Test") {
+            LecturaEscritura.crearArchivoTSPvoraz(rutaBidireccional, resultados.getDistancia(), "bi_"+archivo + ".tour");
         }
         
 

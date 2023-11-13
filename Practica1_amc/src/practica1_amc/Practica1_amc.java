@@ -1,7 +1,6 @@
 package practica1_amc;
 
-import Algoritmos.AlgoritmoExhaustivo;
-import Algoritmos.AlgoritmosDyV;
+import Algoritmos.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +8,6 @@ public class Practica1_amc {
 
     public static void main(String[] args) {
         long inicio;
-        AlgoritmoExhaustivo AExhauxtivo = new AlgoritmoExhaustivo();
         LecturaEscritura l = new LecturaEscritura();
         String FicheroActual = " ";
         ArrayList<Punto> p;
@@ -299,17 +297,88 @@ public class Practica1_amc {
                     do {
                         OpciónVoraz = m.menuPrincipal1B(FicheroActual);
                         switch (OpciónVoraz) {
-                            case 1:
-
+                            case 1://cargar dataset
+                                do {
+                                    ListaFicheros = LecturaEscritura.getNombreFicheros();
+                                    opcion3 = m.menuFicheros(ListaFicheros);
+                                    if (opcion3 == -1) {
+                                        System.out.println("Opción no válida. Por favor, elige una opción válida.1");
+                                    } else {
+                                        try {
+                                            int i = opcion3 - 1;
+                                            FicheroActual = ListaFicheros.get(i);
+                                            PuntoCoordenadas = l.lectura("archivos/" + FicheroActual);
+                                        } catch (Exception e) {
+                                            System.out.println("Error al cargar el archivo");
+                                        }
+                                    }
+                                } while (opcion3 != 0);
                                 break;
-                            case 2:
+                            case 2://comprobar estrategias
+                                 try {
+                                if (PuntoCoordenadas.isEmpty()) {
+                                    throw new Exception();
+                                }
+                                System.out.println("Estrategia           Ruta                                                                 distancia                            tiempo(mseg)");
+                                inicio = System.nanoTime();
+                                Resultado r = AlgoritmosVoraces.Unidireccional(PuntoCoordenadas, FicheroActual);
+                                float tuni = (float) (System.nanoTime() - inicio) / 1000000;
+                                System.out.print("Unidireccional           ");
 
+                                for (int i = 0; i < r.getRuta().size(); i++) {
+                                    System.out.print("" + r.getRuta().get(i) + ",");
+                                }
+                                System.out.print("    " + r.getDistancia());
+                                System.out.println(" " + tuni);
+
+                                inicio = System.nanoTime();
+                                r = AlgoritmosVoraces.Bidireccional(PuntoCoordenadas, FicheroActual);
+                                float tbi = (float) (System.nanoTime() - inicio) / 1000000;
+                                System.out.print("Bidireccional           ");
+
+                                for (int i = 0; i < r.getRuta().size(); i++) {
+                                    System.out.print("" + r.getRuta().get(i) + ",");
+                                }
+                                System.out.print("    " + r.getDistancia());
+                                System.out.println(" " + tbi);
+
+                            } catch (Exception e) {
+                                System.out.println("ERROR: Carga un fichero");
+                            }
+                            break;
+                            case 3://COMPARAR LAS ESTRATEGIAS
+                                System.out.println("Comparar las estrategias voraz.");
+                                System.out.println("         Unidireccional   Bidireccional");
+                                System.out.println("Talla    Tiempo(mseg)     Tiempo(mseg)    ");
+
+                                for (int i = 1000; i <= 5000; i += 1000) {
+                                    float tUni = 0, tBi = 0;
+                                    for (int j = 0; j < 100; j++) {
+
+                                        p = Punto.rellenarPuntos(i, peorCaso);
+                                        inicio = System.nanoTime();
+                                        AlgoritmosVoraces.Unidireccional(p, "Test");
+                                        tUni = System.nanoTime() - inicio;
+
+                                        inicio = System.nanoTime();
+                                        AlgoritmosVoraces.Bidireccional(p, "Test");
+                                        tBi = System.nanoTime() - inicio;
+
+                                    }
+                                    tUni = (float) tUni / 100000000;
+                                    tBi = (float) tBi / 100000000;
+
+                                    System.out.println(i + "     " + tUni + "      " + tBi);
+                                }
                                 break;
-                            case 3:
-
-                                break;
-                            case 4:
-
+                            case 4://CREAR FICHERO TSP ALEATORIO
+                                System.out.println("Escriba el nombre del fichero: ");
+                                String nombre = scanner.nextLine();
+                                System.out.println("Escriba el numero de puntos: ");
+                                int numero = scanner.nextInt();
+                                //System.out.println("Escriba el caso que quiera PEOR: 0 /MEDIO: 1: ");
+                                //int caso = scanner.nextInt();
+                                LecturaEscritura.crearArchivoTSP(nombre, numero, peorCaso);
                                 break;
                             default:
                                 System.out.println("Opción no válida. Por favor, elige una opción válida.");
