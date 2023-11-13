@@ -8,11 +8,11 @@ import practica1_amc.Resultado;
 
 public class AlgoritmosVoraces {
 
-    public static Resultado Unidireccional(ArrayList<Punto> nodos, String nombreFichero) {
+    public static Resultado Unidireccional(ArrayList<Punto> nodos, String archivo) {
         ArrayList<Punto> nodoNoVisitados = new ArrayList<>(nodos);
         ArrayList<Punto> ruta = new ArrayList<>();
         
-        //Seleccionamos la primera nodo
+
         Punto puntoActual = nodoNoVisitados.get(0);
         ruta.add(puntoActual);
         nodoNoVisitados.remove(0);
@@ -35,91 +35,88 @@ public class AlgoritmosVoraces {
             puntoActual = nodoMasCercano;
         }
 
-        // Calcular la distancia total del recorrido
         double distancia = 0;
         for (int i = 0; i < ruta.size() - 1; i++) {
             distancia += ruta.get(i).distancia(ruta.get(i + 1));
         }
-        distancia += ruta.get(ruta.size() - 1).distancia(ruta.get(0)); // Volver al punto de inicio
+        distancia += ruta.get(ruta.size() - 1).distancia(ruta.get(0)); 
 
         Resultado resultados = new Resultado(distancia,ruta);
 
         
-        // Generar el archivo de solución
-        if (nombreFichero != null) {
-            LecturaEscritura.crearArchivoTSPuni(ruta, resultados.getDistancia(), nombreFichero + ".tour");
+        if (archivo != null) {
+            LecturaEscritura.crearArchivoTSPuni(ruta, resultados.getDistancia(),"bi_"+archivo + ".tour");
         }
     
         
         return resultados;
     }
 
-        public Resultado busquedaVorazBidireccional(ArrayList<Punto> ciudades, String nombreFichero) {
-        ArrayList<Punto> ciudadesNoVisitadas = new ArrayList<>(ciudades);
-        ArrayList<Punto> caminoIzquierdo = new ArrayList<>();
-        ArrayList<Punto> caminoDerecho = new ArrayList<>();
+        public static Resultado busquedaVorazBidireccional(ArrayList<Punto> nodos, String archivo) {
+        ArrayList<Punto> nodosNoVisitados = new ArrayList<>(nodos);
+        ArrayList<Punto> ladoIzquierdo = new ArrayList<>();
+        ArrayList<Punto> ladoDerecho = new ArrayList<>();
 
-        // Punto de partida en el extremo izquierdo
-        Punto puntoIzquierdo = ciudadesNoVisitadas.get(0);
-        caminoIzquierdo.add(puntoIzquierdo);
-        ciudadesNoVisitadas.remove(0);
+        Punto puntoIzquierdo = nodosNoVisitados.get(0);
+        ladoIzquierdo.add(puntoIzquierdo);
+        nodosNoVisitados.remove(0);
 
-        // Punto de partida en el extremo derecho
-        Punto puntoDerecho = ciudadesNoVisitadas.get(0);
-        caminoDerecho.add(puntoDerecho);
-        ciudadesNoVisitadas.remove(0);
+ 
+        Punto puntoDerecho = nodosNoVisitados.get(0);
+        ladoDerecho.add(puntoDerecho);
+        nodosNoVisitados.remove(0);
 
-        while (!ciudadesNoVisitadas.isEmpty()) {
-            // Extremo izquierdo
+        while (!nodosNoVisitados.isEmpty()) {
+
             Punto puntoMasCercanoIzquierdo = null;
             double distanciaMinimaIzquierda = Double.MAX_VALUE;
 
-            // Extremo derecho
+    
             Punto puntoMasCercanoDerecho = null;
             double distanciaMinimaDerecha = Double.MAX_VALUE;
 
-            for (Punto ciudad : ciudadesNoVisitadas) {
-                double distanciaIzquierda = puntoIzquierdo.distancia(ciudad);
+            for (Punto nodo : nodosNoVisitados) {
+                double distanciaIzquierda = puntoIzquierdo.distancia(nodo);
                 if (distanciaIzquierda < distanciaMinimaIzquierda) {
                     distanciaMinimaIzquierda = distanciaIzquierda;
-                    puntoMasCercanoIzquierdo = ciudad;
+                    puntoMasCercanoIzquierdo = nodo;
                 }
 
-                double distanciaDerecha = puntoDerecho.distancia(ciudad);
+                double distanciaDerecha = puntoDerecho.distancia(nodo);
                 if (distanciaDerecha < distanciaMinimaDerecha) {
                     distanciaMinimaDerecha = distanciaDerecha;
-                    puntoMasCercanoDerecho = ciudad;
+                    puntoMasCercanoDerecho = nodo;
                 }
             }
 
             if (distanciaMinimaIzquierda <= distanciaMinimaDerecha) {
-                caminoIzquierdo.add(puntoMasCercanoIzquierdo);
-                ciudadesNoVisitadas.remove(puntoMasCercanoIzquierdo);
+                ladoIzquierdo.add(puntoMasCercanoIzquierdo);
+                nodosNoVisitados.remove(puntoMasCercanoIzquierdo);
                 puntoIzquierdo = puntoMasCercanoIzquierdo;
             } else {
-                caminoDerecho.add(puntoMasCercanoDerecho);
-                ciudadesNoVisitadas.remove(puntoMasCercanoDerecho);
+                ladoDerecho.add(puntoMasCercanoDerecho);
+                nodosNoVisitados.remove(puntoMasCercanoDerecho);
                 puntoDerecho = puntoMasCercanoDerecho;
             }
         }
 
-        // Fusionar los caminos izquierdo y derecho en un camino bidireccional
-        ArrayList<Punto> caminoBidireccional = new ArrayList<>(caminoIzquierdo);
-        Collections.reverse(caminoDerecho);
-        caminoBidireccional.addAll(caminoDerecho);
 
-        // Calcular la distancia total del recorrido
+        ArrayList<Punto> rutaBidireccional = new ArrayList<>(ladoIzquierdo);
+        Collections.reverse(ladoDerecho);
+        rutaBidireccional.addAll(ladoDerecho);
+
+
         double distanciaRecorrida = 0;
-        for (int i = 0; i < caminoBidireccional.size() - 1; i++) {
-            distanciaRecorrida += caminoBidireccional.get(i).distancia(caminoBidireccional.get(i + 1));
+        for (int i = 0; i < rutaBidireccional.size() - 1; i++) {
+            distanciaRecorrida += rutaBidireccional.get(i).distancia(rutaBidireccional.get(i + 1));
         }
-        distanciaRecorrida += caminoBidireccional.get(caminoBidireccional.size() - 1).distancia(caminoBidireccional.get(0)); // Volver al punto de inicio
+        distanciaRecorrida += rutaBidireccional.get(rutaBidireccional.size() - 1).distancia(rutaBidireccional.get(0)); 
 
-        Resultado resultados = new Resultado(distanciaRecorrida,caminoBidireccional);
+        Resultado resultados = new Resultado(distanciaRecorrida,rutaBidireccional);
 
-        // Generar el archivo de solución
-        if (nombreFichero != null) {
-            LecturaEscritura.crearArchivoTSPbi(caminoBidireccional, resultados.getDistancia(), nombreFichero + ".tour");
+
+        if (archivo != null) {
+            LecturaEscritura.crearArchivoTSPbi(rutaBidireccional, resultados.getDistancia(), "bi_"+archivo + ".tour");
         }
         
 
