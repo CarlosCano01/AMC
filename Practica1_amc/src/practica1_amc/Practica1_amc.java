@@ -303,7 +303,7 @@ public class Practica1_amc {
                                     opcion3 = m.menuFicheros(ListaFicheros);
                                     if (opcion3 == -1) {
                                         System.out.println("Opción no válida. Por favor, elige una opción válida.1");
-                                    } else {
+                                    } else if (opcion3 > 0){
                                         try {
                                             int i = opcion3 - 1;
                                             FicheroActual = ListaFicheros.get(i);
@@ -385,7 +385,7 @@ public class Practica1_amc {
                                 if (PuntoCoordenadas.isEmpty()) {
                                     throw new Exception();
                                 }
-                                System.out.println("Estrategia           Ruta                                                                                                  distancia                  tiempo(mseg)");
+                                System.out.println("Estrategia           Ruta                                                                           distancia       tiempo(mseg)");
                                 inicio = System.nanoTime();
                                 Resultado ver = AlgoritmoSolucionOptima.recorrerConPermutaciones(PuntoCoordenadas);
                                 float top = (float) (System.nanoTime() - inicio) / 1000000;
