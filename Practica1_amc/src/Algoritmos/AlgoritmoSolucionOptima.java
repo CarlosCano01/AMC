@@ -59,11 +59,4 @@ public class AlgoritmoSolucionOptima {
         arrayList.set(j, temp);
     }
 
-    private static void imprimirArrayList(ArrayList<Punto> arrayList) {
-        // Función auxiliar para imprimir la permutación actual
-        for (Punto elemento : arrayList) {
-            System.out.print(elemento + " ");
-        }
-        System.out.println();
-    }
 }
