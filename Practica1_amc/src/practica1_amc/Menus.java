@@ -54,6 +54,7 @@ public class Menus {
         System.out.println(" 2.- COMPROBAR ESTRATEGIAS");
         System.out.println(" 3.- COMPARAR LAS ESTRATEGIAS ");
         System.out.println(" 4.- CREAR FICHERO TSP ALEATORIO");
+        System.out.println(" 5.- VER EL CAMINO MÁS CORTO");
         System.out.println(" 0.- Salir");
         System.out.println(" ---------");
         System.out.print("Elige opcion: ");

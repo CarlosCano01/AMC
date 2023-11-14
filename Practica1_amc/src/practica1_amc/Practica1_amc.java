@@ -270,7 +270,7 @@ public class Practica1_amc {
                                     opcion3 = m.menuFicheros(ListaFicheros);
                                     if (opcion3 == -1) {
                                         System.out.println("Opción no válida. Por favor, elige una opción válida.1");
-                                    }else if(opcion3>0) {
+                                    } else if (opcion3 > 0) {
                                         try {
                                             int i = opcion3 - 1;
                                             FicheroActual = ListaFicheros.get(i);
@@ -321,6 +321,7 @@ public class Practica1_amc {
                                 }
                                 System.out.println("Estrategia           Ruta                                                                                                  distancia                  tiempo(mseg)");
                                 inicio = System.nanoTime();
+                                System.out.println(FicheroActual);
                                 Resultado r = AlgoritmosVoraces.Unidireccional(PuntoCoordenadas, FicheroActual);
                                 float tuni = (float) (System.nanoTime() - inicio) / 1000000;
                                 System.out.print("Unidireccional         ");
@@ -380,6 +381,26 @@ public class Practica1_amc {
                                 //int caso = scanner.nextInt();
                                 LecturaEscritura.crearArchivoTSP(nombre, numero, peorCaso);
                                 break;
+                            case 5:
+                                try {
+                                if (PuntoCoordenadas.isEmpty()) {
+                                    throw new Exception();
+                                }
+                                System.out.println("Estrategia           Ruta                                                                                                  distancia                  tiempo(mseg)");
+                                inicio = System.nanoTime();
+                                Resultado ver = AlgoritmoSolucionOptima.recorrerConPermutaciones(PuntoCoordenadas);
+                                float top = (float) (System.nanoTime() - inicio) / 1000000;
+                                System.out.print("Optimo         ");
+
+                                for (int i = 0; i < ver.getRuta().size(); i++) {
+                                    System.out.print("" + ver.getRuta().get(i) + ",");
+                                }
+                                System.out.print("    " + ver.getDistancia());
+                                System.out.println("           " + top);
+                            } catch (Exception e) {
+                                System.out.println("ERROR: Carga un fichero");
+                            }
+                            break;
                             default:
                                 System.out.println("Opción no válida. Por favor, elige una opción válida.");
                         }
