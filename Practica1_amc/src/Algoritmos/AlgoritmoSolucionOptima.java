@@ -25,8 +25,6 @@ public class AlgoritmoSolucionOptima {
         try {
             if (arrayList.size() < 11) {
                 if (indice == arrayList.size() - 1) {
-                    // Si hemos llegado al último elemento, imprimir la permutación actual
-                    //imprimirArrayList(arrayList);
                     double distancia = 0;
                     for (int i = 0; i < arrayList.size() - 2; i++) {
                         distancia += arrayList.get(i).distancia(arrayList.get(i + 1));
@@ -35,11 +33,10 @@ public class AlgoritmoSolucionOptima {
                         Rfinal = new Resultado(distancia, arrayList);
                     }
                 } else {
-                    // Recorrer y permutar los elementos restantes
                     for (int i = indice; i < arrayList.size(); i++) {
                         intercambiarElementos(arrayList, indice, i);
                         Rfinal = recorrerConPermutacionesI(arrayList, indice + 1, Rfinal);
-                        intercambiarElementos(arrayList, indice, i); // Deshacer el intercambio para volver al estado original
+                        intercambiarElementos(arrayList, indice, i); 
                     }
                 }
                 
@@ -53,7 +50,6 @@ public class AlgoritmoSolucionOptima {
     }
 
     private static void intercambiarElementos(ArrayList<Punto> arrayList, int i, int j) {
-        // Función auxiliar para intercambiar dos elementos en la lista
         Punto temp = arrayList.get(i);
         arrayList.set(i, arrayList.get(j));
         arrayList.set(j, temp);
