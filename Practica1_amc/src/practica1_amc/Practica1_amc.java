@@ -321,7 +321,6 @@ public class Practica1_amc {
                                 }
                                 System.out.println("Estrategia           Ruta                                                                                                  distancia                  tiempo(mseg)");
                                 inicio = System.nanoTime();
-                                System.out.println(FicheroActual);
                                 Resultado r = AlgoritmosVoraces.Unidireccional(PuntoCoordenadas, FicheroActual);
                                 float tuni = (float) (System.nanoTime() - inicio) / 1000000;
                                 System.out.print("Unidireccional         ");
