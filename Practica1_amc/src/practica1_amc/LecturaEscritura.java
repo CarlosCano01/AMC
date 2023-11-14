@@ -111,7 +111,6 @@ public class LecturaEscritura {
     public static void crearArchivoTSPvoraz(ArrayList<Punto> ruta, double distancia, String archivo) {
         try {
             String carpeta = "archivosvoraz";
-            System.out.println(archivo);
             String nombrecompleto=archivo.substring(0, archivo.lastIndexOf('.'));
             String rutacompleta = carpeta + "/" +nombrecompleto+ "opt.tour";
             BufferedWriter writer = new BufferedWriter(new FileWriter(rutacompleta));
