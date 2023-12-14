@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author carlo
  */
-public class AFD implements IAutomataFinitoDeterminista {
+public class AFD   {
 
     private ArrayList<Transacion> transacciones = new ArrayList();
     private ArrayList<String> estados = new ArrayList();
@@ -27,7 +27,6 @@ public class AFD implements IAutomataFinitoDeterminista {
         this.finales = finales;
     }
 
-    @Override
     public void load(String filePath) throws Exception {
         // Aquí debería comprobar el fichero (existencia, formato, transiciones, etc.)
         try {
@@ -59,7 +58,6 @@ public class AFD implements IAutomataFinitoDeterminista {
 
     }
 
-    @Override
     public boolean reconocer(String cadena) {
         return false;
     }
@@ -69,7 +67,7 @@ public class AFD implements IAutomataFinitoDeterminista {
         return "  ";
     }
 
-    @Override
+
     public boolean esFinal(int estado) {
         return false;
     }
