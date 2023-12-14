@@ -4,38 +4,39 @@
  */
 package Modelo;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import Vistas.Vista_Crearfichero;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
  * @author carlo
  */
 public class Recursos {
-    public void cargarFichero() throws Exception{
-
-        JFileChooser fileChooser = new JFileChooser();
-        File archivoSeleccionado;
-        // Configura el filtro para mostrar solo archivos de texto (opcional)
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto", "txt");
-        fileChooser.setFileFilter(filter);
-
-        // Muestra el diálogo de selección de archivos
-        int resultado = fileChooser.showOpenDialog(null);
-
-        // Verifica si el usuario seleccionó un archivo
-        if (resultado == JFileChooser.APPROVE_OPTION) {
-            // Obtiene el archivo seleccionado
-            archivoSeleccionado = fileChooser.getSelectedFile();
+    public IProceso crearautomata(Vista_Crearfichero vCrear){
+        String variable;
+        String[] array;
+        
+        if(vCrear.jComboBox1.equals("AFD")){
+            AFD a=new AFD();
+             variable=vCrear.jTextField1.getText();
+             array=variable.split(" ");
+             a.addEstados(array);
+             
+             variable=vCrear.jTextField2.getText();
+             a.setInicial(variable);
+             
+             variable=vCrear.jTextField3.getText();
+             array = variable.split(" ");
+             a.addfinales(array);            
+             
             
-            // Imprime la ruta del archivo seleccionado
-            System.out.println("Archivo seleccionado: " + archivoSeleccionado.getAbsolutePath());
-        } else {
-            throw new Exception("No se ha selecionado ningun fichero");
+
+        }else{
+            a= new AFND();
         }
 
+        return a;        
+        
     }
 }

@@ -29,7 +29,7 @@ public class VistaPricipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cargarFichero = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemCrearFichero = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,8 +39,13 @@ public class VistaPricipal extends javax.swing.JFrame {
         cargarFichero.setText("Cargar Fichero");
         jMenu1.add(cargarFichero);
 
-        jMenuItem2.setText("Crear Fichero");
-        jMenu1.add(jMenuItem2);
+        jMenuItemCrearFichero.setText("Crear Fichero");
+        jMenuItemCrearFichero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCrearFicheroActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemCrearFichero);
 
         jMenuBar1.add(jMenu1);
 
@@ -62,6 +67,10 @@ public class VistaPricipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemCrearFicheroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearFicheroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCrearFicheroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,6 +112,6 @@ public class VistaPricipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
+    public javax.swing.JMenuItem jMenuItemCrearFichero;
     // End of variables declaration//GEN-END:variables
 }

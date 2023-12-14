@@ -67,23 +67,23 @@ public class LecturaEscirtura {
             String[] tipAutomata = line.split(" ");
             switch (tipAutomata[1]) {
                 case "AFD":
-                    AFD automataFD=new AFD();
-                    while ((line = br.readLine()) != null) {
-                        String[] parts = line.split(" ");
-                        if (line.equals("FIN")) {
-                            break;
-                        } else if ("ESTADOS:".equals(parts[0])) {
-                            for (int i = 1; i < parts.length - 1; i++) {
-                                estados.add(parts[i]);
-                            }
-                        } else if ("INICIAL:".equals(parts[0])) {
-                            inicial = parts[0];
-                        } else if ("FINALES:".equals(parts[0])) {
-                            for (int i = 1; i < parts.length - 1; i++) {
-                                finales.add(parts[i]);
-                            }
-                        }
-                    }
+//                    AFD automataFD=new AFD();
+//                    while ((line = br.readLine()) != null) {
+//                        String[] parts = line.split(" ");
+//                        if (line.equals("FIN")) {
+//                            break;
+//                        } else if ("ESTADOS:".equals(parts[0])) {
+//                            for (int i = 1; i < parts.length - 1; i++) {
+//                                estados.add(parts[i]);
+//                            }
+//                        } else if ("INICIAL:".equals(parts[0])) {
+//                            inicial = parts[0];
+//                        } else if ("FINALES:".equals(parts[0])) {
+//                            for (int i = 1; i < parts.length - 1; i++) {
+//                                finales.add(parts[i]);
+//                            }
+//                        }
+//                    }
                     break;
                 case "AFND":
                     

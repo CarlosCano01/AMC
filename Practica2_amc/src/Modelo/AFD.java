@@ -7,6 +7,7 @@ package Modelo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class AFD   {
     private String inicial;
     private Map<String, String> transiciones;
 
-    public AFD(Map<String, String> transiciones, Set<String> estados, Set<String> finales, String inicial) {
+    public AFD() {
         this.inicial = null;
         this.transiciones = new HashMap<>();
         this.estados = new HashSet<>();
@@ -31,6 +32,7 @@ public class AFD   {
         this.simbolos = new HashSet<>();
 
     }
+    
 
 
     public void setInicial(String inicial) {
@@ -52,7 +54,37 @@ public class AFD   {
     public String getInicial() {
         return inicial;
     }
+ /**
+     * Agrega un conjunto de estados al autómata.
+     *
+     * @param estados Conjunto de estados a agregar.
+     */
+    public void addEstados(String[] estados) {
+        this.estados.addAll(Arrays.asList(estados));
+    }
 
+    /**
+     * Agrega un conjunto de estados finales al autómata.
+     *
+     * @param estados Conjunto de estados finales a agregar.
+     */
+    public void addfinales(String[] estados) {
+        finales.addAll(Arrays.asList(estados));
+    }
+
+    /**
+     * Agrega una transición al autómata.
+     *
+     * @param partida  Estado de partida de la transición.
+     * @param simbolo  Símbolo de transición.
+     * @param resultado Estado resultado de la transición.
+     */
+    public void addTransicion(String partida, char simbolo, String resultado) {
+        transiciones.put(formarCondicion(partida, simbolo), resultado);
+        if (!simbolos.contains(simbolo)) {
+            simbolos.add(simbolo);
+        }
+    }
     public boolean reconocer(String cadena) throws Exception {
         char[] simbol = cadena.toCharArray();
         //validamos el String
@@ -101,21 +133,8 @@ public class AFD   {
         }
         return finales.contains(estado);
     }
+   
        /**
-     * Agrega una transición al autómata.
-     *
-     * @param partida  Estado de partida de la transición.
-     * @param simbolo  Símbolo de transición.
-     * @param resultado Estado resultado de la transición.
-     */
-    public void addTransicion(String partida, char simbolo, String resultado) {
-        transiciones.put(formarCondicion(partida, simbolo), resultado);
-        if (!simbolos.contains(simbolo)) {
-            simbolos.add(simbolo);
-        }
-    }
-    
-        /**
      * Representación en cadena del autómata.
      *
      * @return Una representación en cadena del autómata.

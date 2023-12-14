@@ -53,7 +53,6 @@ public class AFND {
         return transiciones;
     }
 
-
     public boolean esFinal(int estado) {
         return false;
     }
@@ -143,7 +142,7 @@ public class AFND {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ESTADOS: ").append(estados.toString()).append("\n")
                 .append("INICIAL: ").append(iniciales).append("\n")
@@ -151,10 +150,10 @@ public class AFND {
                 .append("TRANSICIONES: ").append("\n");
         for (Map.Entry<String, String[]> transicion : transiciones.entrySet()) {
             String[] value = transicion.getValue();
-            if(transicion.getKey().contains("-")){
+            if (transicion.getKey().contains("-")) {
                 String[] key = transicion.getKey().split("-");
                 sb.append("\t").append(key[0]).append(" '").append(key[1]).append("' ");
-            }else{
+            } else {
                 String key = transicion.getKey();
                 sb.append("\t").append(key).append(" -> ");
             }
