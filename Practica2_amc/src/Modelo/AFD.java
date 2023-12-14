@@ -17,7 +17,7 @@ import java.util.Set;
  *
  * @author carlo
  */
-public class AFD   {
+public class AFD implements IProceso  {
 
     private Set<String> estados, finales;
     private Set<Character> simbolos;
@@ -85,6 +85,14 @@ public class AFD   {
             simbolos.add(simbolo);
         }
     }
+
+    /**
+     *
+     * @param cadena
+     * @return
+     * @throws Exception
+     */
+    @Override
     public boolean reconocer(String cadena) throws Exception {
         char[] simbol = cadena.toCharArray();
         //validamos el String

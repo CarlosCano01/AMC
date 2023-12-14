@@ -27,7 +27,7 @@ public class Vista_Crearfichero extends javax.swing.JPanel {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Enviar = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -42,7 +42,8 @@ public class Vista_Crearfichero extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Enviar");
+        Enviar.setText("Enviar");
+        Enviar.setActionCommand("EnviarCrear");
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +74,7 @@ public class Vista_Crearfichero extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(Enviar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextField1)
                         .addComponent(jTextField2)
@@ -106,7 +107,7 @@ public class Vista_Crearfichero extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(Enviar)
                         .addGap(37, 37, 37))))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -121,7 +122,7 @@ public class Vista_Crearfichero extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton Enviar;
     public javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

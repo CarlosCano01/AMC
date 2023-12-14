@@ -47,33 +47,33 @@ public class ControladorAplicación implements ActionListener {
     private void addListeners() {
         vPrincipal.cargarFichero.addActionListener(this);
         vPrincipal.jMenuItemCrearFichero.addActionListener(this);
+        vCrear.Enviar.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Recursos r = new Recursos();
         switch (e.getActionCommand()) {
-            case "Cargar Fichero":
-                
-                 {
-                    try {
-                    } catch (Exception ex) {
-                        Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            case "Cargar Fichero": {
+                try {
+                } catch (Exception ex) {
+                    Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("Estoy entrando");
-                break;
-            case "Crear Fichero":
-                 {
-                    muestraPanel(vCrear);
-                    try {
-                       AutomataCargado=r.crearautomata(vCrear);
-                    } catch (Exception ex) {
-                        Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            }
+            System.out.println("Estoy entrando");
+            break;
+            case "Crear Fichero": {
+                muestraPanel(vCrear);
+            }
+            break;
+            case "EnviarCrear": {
+                try {
+                    AutomataCargado=r.crearautomata(vCrear);
+                } catch (Exception ex) {
+                    Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("Estoy enviando");
-                break;
+            }
+            break;
 
         }
     }

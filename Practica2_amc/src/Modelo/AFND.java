@@ -15,9 +15,10 @@ import java.util.Set;
  *
  * @author carlo
  */
-public class AFND {
+public class AFND implements IProceso {
 
-    private Set<String> estados, finales, iniciales;
+    private Set<String> estados, finales;
+    private String inicial;
     private Set<Character> simbolos;
     private Map<String, String[]> transiciones;
 
@@ -25,12 +26,12 @@ public class AFND {
         estados = new HashSet<>();
         finales = new HashSet<>();
         simbolos = new HashSet<>();
-        iniciales = new HashSet<>();
+        inicial = null;
         transiciones = new HashMap<>();
     }
 
-    public void setiniciales(Set<String> iniciales) {
-        this.iniciales = iniciales;
+    public void setiniciales(String inicial) {
+        this.inicial = inicial;
     }
 
     public Set<String> getEstados() {
@@ -41,8 +42,8 @@ public class AFND {
         return finales;
     }
 
-    public Set<String> getiniciales() {
-        return iniciales;
+    public String getinicial() {
+        return inicial;
     }
 
     public Set<Character> getSimbolos() {
@@ -53,8 +54,31 @@ public class AFND {
         return transiciones;
     }
 
+    @Override
     public boolean esFinal(int estado) {
-        return false;
+        return finales.contains(estado);
+    }
+
+    public void setInicial(String inicial) {
+        this.inicial = inicial;
+    }
+
+    /**
+     * Agrega un conjunto de estados finales al autómata.
+     *
+     * @param estados Conjunto de estados finales a agregar.
+     */
+    public void addfinales(String[] estados) {
+        finales.addAll(Arrays.asList(estados));
+    }
+
+    /**
+     * Agrega un conjunto de estados al autómata.
+     *
+     * @param estados Conjunto de estados a agregar.
+     */
+    public void addEstados(String[] estados) {
+        this.estados.addAll(Arrays.asList(estados));
     }
 
     public void lambdaClausura(String estado, Set<String> nuevos) {
@@ -73,15 +97,22 @@ public class AFND {
         return simbolo == null ? partida : new StringBuilder().append(partida).append('-').append(simbolo).toString();
     }
 
+    /**
+     *
+     * @param cadena
+     * @return
+     * @throws Exception
+     */
+    @Override
     public boolean reconocer(String cadena) throws Exception {
         char[] simbol = cadena.toCharArray();
         if (estados.isEmpty()) {
             throw new Exception("No se han definido estados");
         }
-        if (iniciales.isEmpty()) {
-            throw new Exception("Estados iniciales no definido");
+        if (inicial == null) {
+            throw new Exception("Estados inicial no definido");
         }
-        if (!estados.containsAll(iniciales)) {
+        if (inicial==null) {
             throw new Exception("Los estados iniciales no está incluido en la lista de estados");
         }
         if (finales.isEmpty()) {
@@ -115,7 +146,8 @@ public class AFND {
                 }
             }
         }
-        Set<String> macroestado = new HashSet<>(iniciales);
+        /*
+        Set<String> macroestado = new HashSet<>(inicial);
         Set<String> nuevos = new HashSet<>();
         for (char simbolo : simbol) {
             for (String estado : macroestado) {
@@ -137,7 +169,7 @@ public class AFND {
             if (macroestado.isEmpty()) {
                 throw new Exception("El macroestado se ha quedado vacio");
             }
-        }
+        }*/
         return finales.containsAll(macroestado);
     }
 
@@ -145,7 +177,7 @@ public class AFND {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ESTADOS: ").append(estados.toString()).append("\n")
-                .append("INICIAL: ").append(iniciales).append("\n")
+                .append("INICIAL: ").append(inicial).append("\n")
                 .append("FINALES: ").append(finales).append("\n")
                 .append("TRANSICIONES: ").append("\n");
         for (Map.Entry<String, String[]> transicion : transiciones.entrySet()) {

@@ -13,30 +13,46 @@ import java.util.Set;
  * @author carlo
  */
 public class Recursos {
-    public IProceso crearautomata(Vista_Crearfichero vCrear){
+
+    public IProceso crearautomata(Vista_Crearfichero vCrear) {
         String variable;
         String[] array;
-        
-        if(vCrear.jComboBox1.equals("AFD")){
-            AFD a=new AFD();
-             variable=vCrear.jTextField1.getText();
-             array=variable.split(" ");
-             a.addEstados(array);
-             
-             variable=vCrear.jTextField2.getText();
-             a.setInicial(variable);
-             
-             variable=vCrear.jTextField3.getText();
-             array = variable.split(" ");
-             a.addfinales(array);            
-             
-            
+        IProceso b = null;
 
-        }else{
-            a= new AFND();
+        if (vCrear.jComboBox1.equals("AFD")) {
+            AFD a = new AFD();
+            //inicial
+            variable = vCrear.jTextField1.getText();
+            array = variable.split(" ");
+            a.addEstados(array);
+            //todos los estados
+            variable = vCrear.jTextField2.getText();
+            a.setInicial(variable);
+            //transiciones
+            variable = vCrear.jTextField3.getText();
+            array = variable.split(" ");
+            a.addfinales(array);
+            b = a;
+           
+
+        } else {
+            AFND a = new AFND();
+            //inicial
+            variable = vCrear.jTextField1.getText();
+            array = variable.split(" ");
+            a.addEstados(array);
+            //todos los estados
+            variable = vCrear.jTextField2.getText();
+            a.setInicial(variable);
+            //transiciones
+            variable = vCrear.jTextField3.getText();
+            array = variable.split(" ");
+            a.addfinales(array);
+            b = a;
         }
+         
 
-        return a;        
-        
+        return b;
+
     }
 }
