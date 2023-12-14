@@ -14,7 +14,7 @@ public class Practica2_amc {
      */
     public static void main(String[] args) {
         
-        ControladorAplicación CL = new ControladorAplicación();      // Iniciamos la aplicación
+        ControladorAplicación CL = new ControladorAplicación();  
     
     }
     

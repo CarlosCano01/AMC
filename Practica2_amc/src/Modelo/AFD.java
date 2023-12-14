@@ -7,7 +7,10 @@ package Modelo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -15,60 +18,136 @@ import java.util.ArrayList;
  */
 public class AFD   {
 
-    private ArrayList<Transacion> transacciones = new ArrayList();
-    private ArrayList<String> estados = new ArrayList();
-    private ArrayList<String> finales = new ArrayList();
+    private Set<String> estados, finales;
+    private Set<Character> simbolos;
     private String inicial;
+    private Map<String, String> transiciones;
 
-    public AFD(ArrayList<Transacion> transacciones, ArrayList<String> estados, ArrayList<String> finales, String inicial) {
+    public AFD(Map<String, String> transiciones, Set<String> estados, Set<String> finales, String inicial) {
+        this.inicial = null;
+        this.transiciones = new HashMap<>();
+        this.estados = new HashSet<>();
+        this.finales = new HashSet<>();
+        this.simbolos = new HashSet<>();
+
+    }
+
+
+    public void setInicial(String inicial) {
         this.inicial = inicial;
-        this.transacciones = transacciones;
-        this.estados = estados;
-        this.finales = finales;
     }
 
-    public void load(String filePath) throws Exception {
-        // Aquí debería comprobar el fichero (existencia, formato, transiciones, etc.)
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            String line;
-            boolean isReading = false;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(" ");
-                if (line.equals("FIN")) {
-                    break;
-                } else if (parts[0] == "ESTADOS:") {
-                    for (int i = 1; i < parts.length - 1; i++) {
-                        estados.add(parts[i]);
-                    }
-                } else if (parts[0] == "INICIAL:") {
-                    inicial = parts[0];
-                } else if (parts[0] == "FINALES:") {
-                    for (int i = 1; i < parts.length - 1; i++) {
-                        finales.add(parts[i]);
-                    }
-                }
+    public Set<String> getEstados() {
+        return estados;
+    }
 
-            }
-        } catch (IOException e) {
-            System.out.println("Error al cargar el fichero.");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public Set<String> getFinales() {
+        return finales;
+    }
+
+    public Set<Character> getSimbolos() {
+        return simbolos;
+    }
+
+    public String getInicial() {
+        return inicial;
+    }
+
+    public boolean reconocer(String cadena) throws Exception {
+        char[] simbol = cadena.toCharArray();
+        //validamos el String
+        if (estados.isEmpty()) {
+            throw new Exception("No se han definido estados");
         }
-
+        if (inicial == null) {
+            throw new Exception("Estado inicial no definido");
+        }
+        if (!estados.contains(inicial)) {
+            throw new Exception("El estado inicial no está incluido en la lista de estados");
+        }
+        if (finales.isEmpty()) {
+            throw new Exception("No se han definido estados finales");
+        }
+        if (!estados.containsAll(finales)) {
+            throw new Exception("Los estaos finales no está incluido en la lista de estados");
+        }
+        if (simbolos.isEmpty()) {
+            throw new Exception("No se han definido simbolos");
+        }
+        for (Map.Entry<String, String> transicion : transiciones.entrySet()) {
+            String[] key = transicion.getKey().split("-");
+            String value = transicion.getValue();
+            if (!estados.contains(key[0])) {
+                throw new Exception("Estado de partida de transicción no está incluido en la lista de estados");
+            }
+            if(key[1].length() != 1){
+                throw new Exception("Simbolo no es un solo caracter");
+            }else if (!simbolos.contains(key[1].charAt(0))) {
+                throw new Exception("Simbolo de transicción no está incluido en la lista de simbolos");
+            }
+            if (!estados.contains(value)) {
+                throw new Exception("Estado resultado de transicción no está incluido en la lista de estados");
+            }
+        }
+        String estado = inicial;
+        for (char simbolo : simbol) {
+            if (this.simbolos.contains(simbol)) {
+                throw new Exception("Simbolo en cadena no reconocido");
+            }
+            estado = this.transiciones.get(formarCondicion(estado, simbolo));
+            if (estado == null) {
+                throw new Exception("Transicion no incluida en la lista de transiciones");
+            }
+        }
+        return finales.contains(estado);
     }
-
-    public boolean reconocer(String cadena) {
-        return false;
+       /**
+     * Agrega una transición al autómata.
+     *
+     * @param partida  Estado de partida de la transición.
+     * @param simbolo  Símbolo de transición.
+     * @param resultado Estado resultado de la transición.
+     */
+    public void addTransicion(String partida, char simbolo, String resultado) {
+        transiciones.put(formarCondicion(partida, simbolo), resultado);
+        if (!simbolos.contains(simbolo)) {
+            simbolos.add(simbolo);
+        }
     }
-
+    
+        /**
+     * Representación en cadena del autómata.
+     *
+     * @return Una representación en cadena del autómata.
+     */
     @Override
-    public String toString() {
-        return "  ";
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("ESTADOS: ").append(estados.toString()).append("\n")
+                .append("INICIAL: ").append(inicial).append("\n")
+                .append("FINALES: ").append(finales).append("\n")
+                .append("TRANSICIONES: ").append("\n");
+        for (Map.Entry<String, String> transicion : transiciones.entrySet()) {
+            String[] key = transicion.getKey().split("-");
+            String value = transicion.getValue();
+            sb.append("\t").append(key[0]).append(" '").append(key[1]).append("' ").append(value).append("\n");
+        }
+        sb.append("FIN");
+        return sb.toString();
     }
 
+    /**
+     * Forma la condición de transición combinando el estado de partida y el símbolo.
+     *
+     * @param partida Estado de partida de la transición.
+     * @param simbolo Símbolo de transición.
+     * @return Condición de transición formada.
+     */
+    public static String formarCondicion(String partida, char simbolo) {
+        return new StringBuilder().append(partida).append('-').append(simbolo).toString();
+    }
 
     public boolean esFinal(int estado) {
-        return false;
+        return  finales.contains(estado);
     }
 }
