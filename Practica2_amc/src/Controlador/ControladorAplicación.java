@@ -5,7 +5,9 @@
 package Controlador;
 
 import Modelo.IProceso;
+import Modelo.LecturaEscirtura;
 import Modelo.Recursos;
+import Vistas.VistaMensaje;
 import Vistas.VistaPricipal;
 import Vistas.Vista_Crearfichero;
 import Vistas.Vista_Inicial;
@@ -25,13 +27,15 @@ public class ControladorAplicación implements ActionListener {
     private Vistas.VistaPricipal vPrincipal;
     private Vistas.Vista_Inicial vInicial;
     private Vistas.Vista_Crearfichero vCrear;
+    private Vistas.VistaMensaje vMensaje;
     private IProceso AutomataCargado;
 
     public ControladorAplicación() {
         vPrincipal = new VistaPricipal();
         vCrear = new Vista_Crearfichero();
         vInicial = new Vista_Inicial();
-
+        vMensaje=new VistaMensaje();
+        
         vPrincipal.getContentPane().setLayout(new CardLayout());
         vPrincipal.add(vCrear);
         vPrincipal.add(vInicial);
@@ -56,11 +60,12 @@ public class ControladorAplicación implements ActionListener {
         switch (e.getActionCommand()) {
             case "Cargar Fichero": {
                 try {
+                    AutomataCargado=LecturaEscirtura.cargarFichero();
+                    System.out.println(AutomataCargado.toString());
                 } catch (Exception ex) {
-                    Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
+                    vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
             }
-            System.out.println("Estoy entrando");
             break;
             case "Crear Fichero": {
                 muestraPanel(vCrear);

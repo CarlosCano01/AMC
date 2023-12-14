@@ -170,7 +170,8 @@ public class AFND implements IProceso {
                 throw new Exception("El macroestado se ha quedado vacio");
             }
         }*/
-        return finales.containsAll(macroestado);
+        //return finales.containsAll(macroestado);
+        return false;
     }
 
     @Override
