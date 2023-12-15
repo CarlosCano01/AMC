@@ -36,6 +36,9 @@ public class ControladorAplicación implements ActionListener {
         vInicial = new Vista_Inicial();
         vMensaje=new VistaMensaje();
         
+       
+        
+      
         vPrincipal.getContentPane().setLayout(new CardLayout());
         vPrincipal.add(vCrear);
         vPrincipal.add(vInicial);
