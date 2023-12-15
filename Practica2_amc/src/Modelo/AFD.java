@@ -137,14 +137,19 @@ public class AFD implements IProceso {
     public boolean reconocer(String cadena) throws Exception {
         char[] simbol = cadena.toCharArray();
         String estado = inicial;
+        
+        
         for (char simbolo : simbol) {
-            if (this.simbolos.contains(simbol)) {
+            if (!this.simbolos.contains(simbolo)) {
                 throw new Exception("Simbolo en cadena no reconocido");
             }
+            String principio=estado;
             estado = this.transiciones.get(formarCondicion(estado, simbolo));
+            System.out.println(principio+" con "+ simbolo +" a "+ estado);
             if (estado == null) {
-                throw new Exception("Transicion no incluida en la lista de transiciones");
+                return false;
             }
+
         }
 
         return finales.contains(estado);

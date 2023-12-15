@@ -8,23 +8,22 @@ import Vistas.VistaAñadirTransición;
 import Vistas.VistaComprobar;
 import Vistas.Vista_Crearfichero;
 import java.awt.Dialog;
-import java.util.Map;
-import java.util.Set;
+
 
 /**
  *
  * @author carlo
  */
 public class Recursos {
-    
+
     private Vista_Crearfichero vCrear;
     private VistaAñadirTransición vAt;
     private VistaComprobar vComprobar;
-    
-    public Recursos(Vista_Crearfichero vCrear,VistaAñadirTransición vATransicion,VistaComprobar vComprobar){
-        this.vCrear=vCrear;
-        this.vAt=vATransicion;
-        this.vComprobar=vComprobar;
+
+    public Recursos(Vista_Crearfichero vCrear, VistaAñadirTransición vATransicion, VistaComprobar vComprobar) {
+        this.vCrear = vCrear;
+        this.vAt = vATransicion;
+        this.vComprobar = vComprobar;
     }
     
     
@@ -48,12 +47,11 @@ public class Recursos {
             a.addfinales(array);
             //transiciones
             while (vCrear.modeloTablaTransiciones.getRowCount() > 0) {
-                a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(),vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0),vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
+                a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(), vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0), vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
                 vCrear.modeloTablaTransiciones.removeRow(0);
             }
             a.validar();
             b = a;
-           
 
         } else {
             AFND a = new AFND();
@@ -79,26 +77,33 @@ public class Recursos {
             System.out.println(a.toString());
             b = a;
         }
-         
 
         return b;
 
     }
-    public void añadirTransición(){
+
+    public void añadirTransición() {
         Object[] fila = new Object[3];
-            fila[0] = vAt.jTextFieldInicial.getText();
-            fila[1] = vAt.jTextFieldCaract.getText();
-            fila[2] = vAt.jTextFieldFinal.getText();
-            vCrear.modeloTablaTransiciones.addRow(fila);
+        fila[0] = vAt.jTextFieldInicial.getText();
+        fila[1] = vAt.jTextFieldCaract.getText();
+        fila[2] = vAt.jTextFieldFinal.getText();
+        vCrear.modeloTablaTransiciones.addRow(fila);
     }
 
-    public void muestraNTransacion(){
+    public void muestraNTransacion() {
         vAt.setLocationRelativeTo(null);
         vAt.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         vAt.setVisible(true);
     }
-    public void ComprobarP(){
-       // vComp
+
+    public boolean ComprobarP(IProceso Automata) throws Exception {
+        String cadena= vComprobar.jTextField1.getText();
+        if( Automata.reconocer(cadena)){
+            return true;
+        }else{
+            return false;
+        }
+
     }
-    
+
 }

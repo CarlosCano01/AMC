@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -79,7 +80,28 @@ public class AFND implements IProceso {
     public void addEstados(String[] estados) {
         this.estados.addAll(Arrays.asList(estados));
     }
+    
+    public void addTransicion(String partida, Character simbolo, String resultado) {
+        
+        if(transiciones.get(formarCondicion(partida, simbolo))!=null){
+            String[] valoresActuales = transiciones.get(formarCondicion(partida, simbolo));
 
+
+            String[] nuevosValores = new String[valoresActuales.length + 1];
+            System.arraycopy(valoresActuales, 0, nuevosValores, 0, valoresActuales.length);
+            nuevosValores[nuevosValores.length - 1] = resultado;
+
+
+            transiciones.put(formarCondicion(partida, simbolo), nuevosValores);
+        }else{
+            String[] valoresActuales = new String[]{resultado};
+            transiciones.put(formarCondicion(partida, simbolo), valoresActuales);
+        }
+        if (!simbolos.contains(simbolo)) {
+            simbolos.add(simbolo);
+        }
+    }
+    
     public void lambdaClausura(String estado, Set<String> nuevos) {
         String[] resultados = transiciones.get(estado);
         if (resultados != null) {
@@ -160,6 +182,9 @@ public class AFND implements IProceso {
         macroestado.add(inicial);
         Set<String> nuevos = new HashSet<>();
         for (char simbolo : simbol) {
+            if (!this.simbolos.contains(simbolo)) {
+                throw new Exception("Simbolo en cadena no reconocido");
+            }
             for (String estado : macroestado) {
                 lambdaClausura(estado, nuevos);
             }

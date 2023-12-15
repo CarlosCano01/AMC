@@ -4,8 +4,6 @@
  */
 package Vistas;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author carlo

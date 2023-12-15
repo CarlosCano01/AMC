@@ -41,13 +41,15 @@ public class ControladorAplicación implements ActionListener {
         vInicial = new Vista_Inicial();
         vATransición = new VistaAñadirTransición();
         vMensaje = new VistaMensaje();
-        r = new Recursos(vCrear, vATransición,vComp);
+        vComp = new VistaComprobar();
+        r = new Recursos(vCrear, vATransición, vComp);
 //       vCrear.setSize(vPrincipal.getSize());
 //       vInicial.setSize(vPrincipal.getSize());
 
         vPrincipal.getContentPane().setLayout(new CardLayout());
         vPrincipal.add(vCrear);
         vPrincipal.add(vInicial);
+        vPrincipal.add(vComp);
         muestraPanel(vInicial);
 
         addListeners();
@@ -60,10 +62,11 @@ public class ControladorAplicación implements ActionListener {
     private void addListeners() {
         vPrincipal.cargarFichero.addActionListener(this);
         vPrincipal.jMenuItemCrearFichero.addActionListener(this);
+        vPrincipal.jMenuItemComprobar.addActionListener(this);
         vCrear.Enviar.addActionListener(this);
-        //vComp..addActionListener(this);
         vCrear.jButtonAñadirTransición.addActionListener(this);
         vATransición.jButtonAñadirT.addActionListener(this);
+        vComp.jButton1.addActionListener(this);
     }
 
     @Override
@@ -78,6 +81,11 @@ public class ControladorAplicación implements ActionListener {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
             }
+
+            case "ComprobarPalabra": {
+                muestraPanel(vComp);
+            }
+
             break;
             case "Crear Fichero": {
                 muestraPanel(vCrear);
@@ -109,9 +117,14 @@ public class ControladorAplicación implements ActionListener {
                 }
             }
             break;
-            case "ComprobarPalabra": {
+            case "Comprobar": {
                 try {
-                    r.ComprobarP();
+
+                    if (r.ComprobarP(AutomataCargado)) {
+                        vComp.setResultadoLabelText("La cadena pertenece al automata");
+                    } else {
+                        vComp.setResultadoLabelText("La cadena no pertenece al automata");
+                    }
                 } catch (Exception ex) {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
@@ -123,6 +136,8 @@ public class ControladorAplicación implements ActionListener {
 
     private void muestraPanel(JPanel jP) {
         vCrear.setVisible(false);
+        vComp.setVisible(false);
+        vInicial.setVisible(false);
         jP.setVisible(true);
 
     }
