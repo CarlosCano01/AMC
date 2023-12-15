@@ -4,7 +4,9 @@
  */
 package Modelo;
 
+import Vistas.VistaAñadirTransición;
 import Vistas.Vista_Crearfichero;
+import java.awt.Dialog;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,12 +15,21 @@ import java.util.Set;
  * @author carlo
  */
 public class Recursos {
-
-    public IProceso crearautomata(Vista_Crearfichero vCrear) {
+    
+    private Vista_Crearfichero vCrear;
+    private VistaAñadirTransición vAt;
+    
+    public Recursos(Vista_Crearfichero vCrear,VistaAñadirTransición vATransicion){
+        this.vCrear=vCrear;
+        this.vAt=vATransicion;
+    }
+    
+    
+    public IProceso crearautomata() {
         String variable;
         String[] array;
         IProceso b = null;
-
+        
         if (vCrear.jComboBox1.equals("AFD")) {
             AFD a = new AFD();
             //inicial
@@ -29,10 +40,10 @@ public class Recursos {
             variable = vCrear.jTextField2.getText();
             a.setInicial(variable);
             //transiciones
-            variable = vCrear.jTextField3.getText();
-            array = variable.split(" ");
-            a.addfinales(array);
-            b = a;
+//            variable = vCrear.jTextField3.getText();
+//            array = variable.split(" ");
+//            a.addfinales(array);
+//            b = a;
            
 
         } else {
@@ -45,14 +56,30 @@ public class Recursos {
             variable = vCrear.jTextField2.getText();
             a.setInicial(variable);
             //transiciones
-            variable = vCrear.jTextField3.getText();
-            array = variable.split(" ");
-            a.addfinales(array);
-            b = a;
+//            variable = vCrear.jTextField3.getText();
+//            array = variable.split(" ");
+//            a.addfinales(array);
+//            b = a;
         }
          
 
         return b;
 
+    }
+    public void añadirTransición(){
+        System.out.println("pata");
+        Object[] fila = new Object[3];
+        System.out.println("estoy funcionando");    
+            fila[0] = vAt.jTextFieldInicial.getText();
+            fila[1] = vAt.jTextFieldCaract.getText();
+            fila[2] = vAt.jTextFieldFinal.getText();
+            vCrear.modeloTablaTransiciones.addRow(fila);
+        vAt.dispose();
+    }
+
+    public void muestraNTransacion(){
+        vAt.setLocationRelativeTo(null);
+        vAt.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        vAt.setVisible(true);
     }
 }
