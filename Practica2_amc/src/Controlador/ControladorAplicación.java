@@ -84,6 +84,8 @@ public class ControladorAplicación implements ActionListener {
             case "EnviarCrear": {
                 try {
                     AutomataCargado=r.crearautomata();
+                    System.out.println(AutomataCargado.toString());
+
                 } catch (Exception ex) {
                     Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -100,6 +102,7 @@ public class ControladorAplicación implements ActionListener {
             case "AñadirTransiciónD": {
                 try {
                     r.añadirTransición();
+                    vATransición.dispose();
                 } catch (Exception ex) {
                     Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
                 }

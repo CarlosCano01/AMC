@@ -29,31 +29,36 @@ public class Recursos {
         String variable;
         String[] array;
         IProceso b = null;
-        
-        if (vCrear.jComboBox1.equals("AFD")) {
+        if (vCrear.jComboBox1.getSelectedItem().equals("AFD")) {
             AFD a = new AFD();
             //inicial
-            variable = vCrear.jTextField1.getText();
+            variable = vCrear.jTextFieldEstadoInicial.getText();
+
+            a.setInicial(variable);
+            //todos los estados
+            variable = vCrear.jTextFieldEstados.getText();
             array = variable.split(" ");
             a.addEstados(array);
-            //todos los estados
-            variable = vCrear.jTextField2.getText();
-            a.setInicial(variable);
+            //estados finales
+            variable = vCrear.jTextFieldEstadosFinales.getText();
+            array = variable.split(" ");
+            a.addfinales(array);
             //transiciones
-//            variable = vCrear.jTextField3.getText();
-//            array = variable.split(" ");
-//            a.addfinales(array);
-//            b = a;
+            while (vCrear.modeloTablaTransiciones.getRowCount() > 0) {
+                a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(),vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0),vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
+                vCrear.modeloTablaTransiciones.removeRow(0);
+            }
+            b = a;
            
 
         } else {
             AFND a = new AFND();
             //inicial
-            variable = vCrear.jTextField1.getText();
+            variable = vCrear.jTextFieldEstados.getText();
             array = variable.split(" ");
             a.addEstados(array);
             //todos los estados
-            variable = vCrear.jTextField2.getText();
+            variable = vCrear.jTextFieldEstadosFinales.getText();
             a.setInicial(variable);
             //transiciones
 //            variable = vCrear.jTextField3.getText();
@@ -67,14 +72,11 @@ public class Recursos {
 
     }
     public void añadirTransición(){
-        System.out.println("pata");
         Object[] fila = new Object[3];
-        System.out.println("estoy funcionando");    
             fila[0] = vAt.jTextFieldInicial.getText();
             fila[1] = vAt.jTextFieldCaract.getText();
             fila[2] = vAt.jTextFieldFinal.getText();
             vCrear.modeloTablaTransiciones.addRow(fila);
-        vAt.dispose();
     }
 
     public void muestraNTransacion(){
