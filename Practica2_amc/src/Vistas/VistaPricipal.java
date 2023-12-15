@@ -34,6 +34,7 @@ public class VistaPricipal extends javax.swing.JFrame {
         cargarFichero = new javax.swing.JMenuItem();
         jMenuItemCrearFichero = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItemComprobar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +54,16 @@ public class VistaPricipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
+
+        jMenuItemComprobar.setText("Comprobar Palabra");
+        jMenuItemComprobar.setActionCommand("ComprobarPalabra");
+        jMenuItemComprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemComprobarActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemComprobar);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -75,12 +86,17 @@ public class VistaPricipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemCrearFicheroActionPerformed
 
+    private void jMenuItemComprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemComprobarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemComprobarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenuItem cargarFichero;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuItem jMenuItemComprobar;
     public javax.swing.JMenuItem jMenuItemCrearFichero;
     // End of variables declaration//GEN-END:variables
 }

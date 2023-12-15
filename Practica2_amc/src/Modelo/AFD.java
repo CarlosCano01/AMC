@@ -17,7 +17,7 @@ import java.util.Set;
  *
  * @author carlo
  */
-public class AFD implements IProceso  {
+public class AFD implements IProceso {
 
     private Set<String> estados, finales;
     private Set<Character> simbolos;
@@ -32,8 +32,6 @@ public class AFD implements IProceso  {
         this.simbolos = new HashSet<>();
 
     }
-    
-
 
     public void setInicial(String inicial) {
         this.inicial = inicial;
@@ -54,7 +52,8 @@ public class AFD implements IProceso  {
     public String getInicial() {
         return inicial;
     }
- /**
+
+    /**
      * Agrega un conjunto de estados al autómata.
      *
      * @param estados Conjunto de estados a agregar.
@@ -75,8 +74,8 @@ public class AFD implements IProceso  {
     /**
      * Agrega una transición al autómata.
      *
-     * @param partida  Estado de partida de la transición.
-     * @param simbolo  Símbolo de transición.
+     * @param partida Estado de partida de la transición.
+     * @param simbolo Símbolo de transición.
      * @param resultado Estado resultado de la transición.
      */
     public void addTransicion(String partida, char simbolo, String resultado) {
@@ -87,15 +86,12 @@ public class AFD implements IProceso  {
     }
 
     /**
+     * Método que valida la estructura del autómata, verificando que esté
+     * correctamente definido.
      *
-     * @param cadena
-     * @return
-     * @throws Exception
+     * @throws Exception Si el autómata no está correctamente definido.
      */
-    @Override
-    public boolean reconocer(String cadena) throws Exception {
-        char[] simbol = cadena.toCharArray();
-        //validamos el String
+    public void validar() throws Exception {
         if (estados.isEmpty()) {
             throw new Exception("No se han definido estados");
         }
@@ -120,15 +116,26 @@ public class AFD implements IProceso  {
             if (!estados.contains(key[0])) {
                 throw new Exception("Estado de partida de transicción no está incluido en la lista de estados");
             }
-            if(key[1].length() != 1){
+            if (key[1].length() != 1) {
                 throw new Exception("Simbolo no es un solo caracter");
-            }else if (!simbolos.contains(key[1].charAt(0))) {
+            } else if (!simbolos.contains(key[1].charAt(0))) {
                 throw new Exception("Simbolo de transicción no está incluido en la lista de simbolos");
             }
             if (!estados.contains(value)) {
                 throw new Exception("Estado resultado de transicción no está incluido en la lista de estados");
             }
         }
+    }
+
+    /**
+     *
+     * @param cadena
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public boolean reconocer(String cadena) throws Exception {
+        char[] simbol = cadena.toCharArray();
         String estado = inicial;
         for (char simbolo : simbol) {
             if (this.simbolos.contains(simbol)) {
@@ -139,16 +146,17 @@ public class AFD implements IProceso  {
                 throw new Exception("Transicion no incluida en la lista de transiciones");
             }
         }
+
         return finales.contains(estado);
     }
-   
-       /**
+
+    /**
      * Representación en cadena del autómata.
      *
      * @return Una representación en cadena del autómata.
      */
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ESTADOS: ").append(estados.toString()).append("\n")
                 .append("INICIAL: ").append(inicial).append("\n")
@@ -164,7 +172,8 @@ public class AFD implements IProceso  {
     }
 
     /**
-     * Forma la condición de transición combinando el estado de partida y el símbolo.
+     * Forma la condición de transición combinando el estado de partida y el
+     * símbolo.
      *
      * @param partida Estado de partida de la transición.
      * @param simbolo Símbolo de transición.
@@ -175,6 +184,6 @@ public class AFD implements IProceso  {
     }
 
     public boolean esFinal(int estado) {
-        return  finales.contains(estado);
+        return finales.contains(estado);
     }
 }

@@ -8,6 +8,7 @@ import Modelo.IProceso;
 import Modelo.LecturaEscirtura;
 import Modelo.Recursos;
 import Vistas.VistaAñadirTransición;
+import Vistas.VistaComprobar;
 import Vistas.VistaMensaje;
 import Vistas.VistaPricipal;
 import Vistas.Vista_Crearfichero;
@@ -30,6 +31,7 @@ public class ControladorAplicación implements ActionListener {
     private Vista_Crearfichero vCrear;
     private VistaMensaje vMensaje;
     private VistaAñadirTransición vATransición;
+    private VistaComprobar vComp;
     private Recursos r;
     private IProceso AutomataCargado;
 
@@ -37,13 +39,12 @@ public class ControladorAplicación implements ActionListener {
         vPrincipal = new VistaPricipal();
         vCrear = new Vista_Crearfichero();
         vInicial = new Vista_Inicial();
-        vATransición= new VistaAñadirTransición();
-        vMensaje=new VistaMensaje();
-        r = new Recursos(vCrear,vATransición);
+        vATransición = new VistaAñadirTransición();
+        vMensaje = new VistaMensaje();
+        r = new Recursos(vCrear, vATransición,vComp);
 //       vCrear.setSize(vPrincipal.getSize());
 //       vInicial.setSize(vPrincipal.getSize());
-        
-      
+
         vPrincipal.getContentPane().setLayout(new CardLayout());
         vPrincipal.add(vCrear);
         vPrincipal.add(vInicial);
@@ -60,17 +61,18 @@ public class ControladorAplicación implements ActionListener {
         vPrincipal.cargarFichero.addActionListener(this);
         vPrincipal.jMenuItemCrearFichero.addActionListener(this);
         vCrear.Enviar.addActionListener(this);
+        //vComp..addActionListener(this);
         vCrear.jButtonAñadirTransición.addActionListener(this);
         vATransición.jButtonAñadirT.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         switch (e.getActionCommand()) {
             case "Cargar Fichero": {
                 try {
-                    AutomataCargado=LecturaEscirtura.cargarFichero();
+                    AutomataCargado = LecturaEscirtura.cargarFichero();
                     System.out.println(AutomataCargado.toString());
                 } catch (Exception ex) {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
@@ -103,6 +105,14 @@ public class ControladorAplicación implements ActionListener {
                 try {
                     r.añadirTransición();
                     vATransición.dispose();
+                } catch (Exception ex) {
+                    Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            case "ComprobarPalabra": {
+                try {
+                    r.ComprobarP();
                 } catch (Exception ex) {
                     Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
                 }

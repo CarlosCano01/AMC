@@ -5,6 +5,7 @@
 package Modelo;
 
 import Vistas.VistaAñadirTransición;
+import Vistas.VistaComprobar;
 import Vistas.Vista_Crearfichero;
 import java.awt.Dialog;
 import java.util.Map;
@@ -18,10 +19,12 @@ public class Recursos {
     
     private Vista_Crearfichero vCrear;
     private VistaAñadirTransición vAt;
+    private VistaComprobar vComprobar;
     
-    public Recursos(Vista_Crearfichero vCrear,VistaAñadirTransición vATransicion){
+    public Recursos(Vista_Crearfichero vCrear,VistaAñadirTransición vATransicion,VistaComprobar vComprobar){
         this.vCrear=vCrear;
         this.vAt=vATransicion;
+        this.vComprobar=vComprobar;
     }
     
     
@@ -84,4 +87,8 @@ public class Recursos {
         vAt.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         vAt.setVisible(true);
     }
+    public boolean ComprobarP(){
+       // vComp
+    }
+    
 }
