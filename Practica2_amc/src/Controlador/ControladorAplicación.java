@@ -86,10 +86,9 @@ public class ControladorAplicación implements ActionListener {
             case "EnviarCrear": {
                 try {
                     AutomataCargado=r.crearautomata();
-                    System.out.println(AutomataCargado.toString());
 
                 } catch (Exception ex) {
-                    Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
+                    vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
             }
             break;
@@ -97,7 +96,7 @@ public class ControladorAplicación implements ActionListener {
                 try {
                     r.muestraNTransacion();
                 } catch (Exception ex) {
-                    Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
+                    vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
             }
             break;
@@ -106,7 +105,7 @@ public class ControladorAplicación implements ActionListener {
                     r.añadirTransición();
                     vATransición.dispose();
                 } catch (Exception ex) {
-                    Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
+                    vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
             }
             break;
@@ -114,7 +113,7 @@ public class ControladorAplicación implements ActionListener {
                 try {
                     r.ComprobarP();
                 } catch (Exception ex) {
-                    Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
+                    vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
             }
             break;

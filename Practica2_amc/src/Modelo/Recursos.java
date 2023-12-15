@@ -28,7 +28,7 @@ public class Recursos {
     }
     
     
-    public IProceso crearautomata() {
+    public IProceso crearautomata() throws Exception {
         String variable;
         String[] array;
         IProceso b = null;
@@ -51,23 +51,33 @@ public class Recursos {
                 a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(),vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0),vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
                 vCrear.modeloTablaTransiciones.removeRow(0);
             }
+            a.validar();
             b = a;
            
 
         } else {
             AFND a = new AFND();
             //inicial
+            //inicial
+            variable = vCrear.jTextFieldEstadoInicial.getText();
+
+            a.setInicial(variable);
+            //todos los estados
             variable = vCrear.jTextFieldEstados.getText();
             array = variable.split(" ");
             a.addEstados(array);
-            //todos los estados
+            //estados finales
             variable = vCrear.jTextFieldEstadosFinales.getText();
-            a.setInicial(variable);
+            array = variable.split(" ");
+            a.addfinales(array);
             //transiciones
-//            variable = vCrear.jTextField3.getText();
-//            array = variable.split(" ");
-//            a.addfinales(array);
-//            b = a;
+            while (vCrear.modeloTablaTransiciones.getRowCount() > 0) {
+                a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(),vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0),vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
+                vCrear.modeloTablaTransiciones.removeRow(0);
+            }
+            a.validar();
+            System.out.println(a.toString());
+            b = a;
         }
          
 
@@ -87,7 +97,7 @@ public class Recursos {
         vAt.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         vAt.setVisible(true);
     }
-    public boolean ComprobarP(){
+    public void ComprobarP(){
        // vComp
     }
     
