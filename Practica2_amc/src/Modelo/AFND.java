@@ -96,20 +96,20 @@ public class AFND implements IProceso {
         return simbolo == null ? partida : new StringBuilder().append(partida).append('-').append(simbolo).toString();
     }
 
-    /**
+        /**
+     * Método que valida la estructura del autómata, verificando que esté correctamente definido.
      *
-     * @param cadena
-     * @return
-     * @throws Exception
+     * @throws Exception Si el autómata no está correctamente definido.
      */
-    @Override
-    public boolean reconocer(String cadena) throws Exception {
-        char[] simbol = cadena.toCharArray();
+    public void validar() throws Exception {
         if (estados.isEmpty()) {
             throw new Exception("No se han definido estados");
         }
-        if (inicial == null) {
-            throw new Exception("Estados inicial no definido");
+        if (inicial.isEmpty()) {
+            throw new Exception("Estados iniciales no definido");
+        }
+        if (!estados.contains(inicial)) {
+            throw new Exception("Los estados iniciales no está incluido en la lista de estados");
         }
         if (finales.isEmpty()) {
             throw new Exception("No se han definido estados finales");
@@ -142,6 +142,20 @@ public class AFND implements IProceso {
                 }
             }
         }
+    }
+    
+    
+    
+    /**
+     *
+     * @param cadena
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public boolean reconocer(String cadena) throws Exception {
+        char[] simbol = cadena.toCharArray();
+
         Set<String> macroestado = new HashSet<>();
         macroestado.add(inicial);
         Set<String> nuevos = new HashSet<>();

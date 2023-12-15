@@ -113,7 +113,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Enviar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="A&#xf1;adir autoamta"/>
+        <Property name="text" type="java.lang.String" value="A&#xf1;adir automata"/>
         <Property name="actionCommand" type="java.lang.String" value="EnviarCrear"/>
       </Properties>
       <AuxValues>

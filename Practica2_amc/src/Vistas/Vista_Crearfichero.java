@@ -53,7 +53,7 @@ public class Vista_Crearfichero extends javax.swing.JPanel {
             }
         });
 
-        Enviar.setText("Añadir autoamta");
+        Enviar.setText("Añadir automata");
         Enviar.setActionCommand("EnviarCrear");
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
