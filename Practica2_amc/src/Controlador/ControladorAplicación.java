@@ -41,7 +41,7 @@ public class ControladorAplicación implements ActionListener {
         vInicial = new Vista_Inicial();
         vATransición = new VistaAñadirTransición();
         vMensaje = new VistaMensaje();
-        r = new Recursos(vCrear, vATransición,vComp);
+        r = new Recursos(vCrear, vATransición, vComp);
 //       vCrear.setSize(vPrincipal.getSize());
 //       vInicial.setSize(vPrincipal.getSize());
 
@@ -61,7 +61,6 @@ public class ControladorAplicación implements ActionListener {
         vPrincipal.cargarFichero.addActionListener(this);
         vPrincipal.jMenuItemCrearFichero.addActionListener(this);
         vCrear.Enviar.addActionListener(this);
-        //vComp..addActionListener(this);
         vCrear.jButtonAñadirTransición.addActionListener(this);
         vATransición.jButtonAñadirT.addActionListener(this);
     }
@@ -78,6 +77,11 @@ public class ControladorAplicación implements ActionListener {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
             }
+
+            case "ComprobarPalabra": {
+                muestraPanel(vComp);
+            }
+
             break;
             case "Crear Fichero": {
                 muestraPanel(vCrear);
@@ -85,7 +89,7 @@ public class ControladorAplicación implements ActionListener {
             break;
             case "EnviarCrear": {
                 try {
-                    AutomataCargado=r.crearautomata();
+                    AutomataCargado = r.crearautomata();
                     System.out.println(AutomataCargado.toString());
 
                 } catch (Exception ex) {
@@ -110,9 +114,14 @@ public class ControladorAplicación implements ActionListener {
                 }
             }
             break;
-            case "ComprobarPalabra": {
+            case "Comprobar": {
                 try {
-                    r.ComprobarP();
+
+                    if (r.ComprobarP(AutomataCargado)) {
+                        vComp.setResultadoLabelText("La cadena pertenece al automata");
+                    } else {
+                        vComp.setResultadoLabelText("La cadena no pertenece al automata");
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(ControladorAplicación.class.getName()).log(Level.SEVERE, null, ex);
                 }
