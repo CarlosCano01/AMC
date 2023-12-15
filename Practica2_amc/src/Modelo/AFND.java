@@ -4,7 +4,6 @@
  */
 package Modelo;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,7 +12,7 @@ import java.util.Set;
 
 /**
  *
- * @author carlo
+ * @author nacho
  */
 public class AFND implements IProceso {
 
@@ -30,7 +29,7 @@ public class AFND implements IProceso {
         transiciones = new HashMap<>();
     }
 
-    public void setiniciales(String inicial) {
+    public void setinicial(String inicial) {
         this.inicial = inicial;
     }
 
@@ -112,9 +111,6 @@ public class AFND implements IProceso {
         if (inicial == null) {
             throw new Exception("Estados inicial no definido");
         }
-        if (inicial==null) {
-            throw new Exception("Los estados iniciales no está incluido en la lista de estados");
-        }
         if (finales.isEmpty()) {
             throw new Exception("No se han definido estados finales");
         }
@@ -146,8 +142,8 @@ public class AFND implements IProceso {
                 }
             }
         }
-        /*
-        Set<String> macroestado = new HashSet<>(inicial);
+        Set<String> macroestado = new HashSet<>();
+        macroestado.add(inicial);
         Set<String> nuevos = new HashSet<>();
         for (char simbolo : simbol) {
             for (String estado : macroestado) {
@@ -169,10 +165,9 @@ public class AFND implements IProceso {
             if (macroestado.isEmpty()) {
                 throw new Exception("El macroestado se ha quedado vacio");
             }
-        }*/
-        //return finales.containsAll(macroestado);
-        return false;
-    }
+        }
+        return finales.containsAll(macroestado);
+     }
 
     @Override
     public String toString() {
