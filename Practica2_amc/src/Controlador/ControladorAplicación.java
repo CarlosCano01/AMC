@@ -36,6 +36,10 @@ public class ControladorAplicación implements ActionListener {
     private IProceso AutomataCargado;
     private File archivo;
 
+    /**
+     * Constructor de la clase {@code ControladorAplicación}. Inicializa las
+     * vistas, recursos y establece la vista inicial.
+     */
     public ControladorAplicación() {
         vPrincipal = new VistaPricipal();
         vCrear = new Vista_Crearfichero();
@@ -60,6 +64,10 @@ public class ControladorAplicación implements ActionListener {
 
     }
 
+    /**
+     * Añade los listeners necesarios para manejar eventos en la interfaz
+     * gráfica.
+     */
     private void addListeners() {
         vPrincipal.cargarFichero.addActionListener(this);
         vPrincipal.jMenuItemCrearFichero.addActionListener(this);
@@ -70,14 +78,19 @@ public class ControladorAplicación implements ActionListener {
         vComp.jButton1.addActionListener(this);
     }
 
+    /**
+     * Maneja los eventos de la interfaz gráfica según la acción realizada.
+     *
+     * @param e El evento de acción generado.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
         switch (e.getActionCommand()) {
             case "Cargar Fichero": {
                 try {
-           
-                    archivo=LecturaEscirtura.cargarFichero();
+
+                    archivo = LecturaEscirtura.cargarFichero();
                     AutomataCargado = LecturaEscirtura.ComprobarYCargar(archivo.getAbsolutePath());
                     r.mostrarArchivo(archivo.getName());
                 } catch (Exception ex) {
@@ -85,10 +98,11 @@ public class ControladorAplicación implements ActionListener {
                 }
             }
             break;
-            case "ComprobarPalabra":  {
+            case "ComprobarPalabra": {
                 try {
-                    if(AutomataCargado==null)
+                    if (AutomataCargado == null) {
                         throw new Exception("Debes de selecionar un archivo o crear uno");
+                    }
                     muestraPanel(vComp);
                 } catch (Exception ex) {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
@@ -103,7 +117,7 @@ public class ControladorAplicación implements ActionListener {
             break;
             case "EnviarCrear": {
                 try {
-                    AutomataCargado=r.crearautomata();
+                    AutomataCargado = r.crearautomata();
 
                 } catch (Exception ex) {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
@@ -140,6 +154,11 @@ public class ControladorAplicación implements ActionListener {
         }
     }
 
+    /**
+     * Muestra el panel especificado y oculta los demás paneles de las vistas.
+     *
+     * @param jP El panel a mostrar.
+     */
     private void muestraPanel(JPanel jP) {
         vCrear.setVisible(false);
         vComp.setVisible(false);

@@ -25,6 +25,11 @@ public class AFD implements IProceso {
     private Map<String, String> transiciones;
     private String pasoapaso="";
 
+    /**
+     * Constructor de la clase {@code AFD}.
+     * Inicializa los conjuntos y mapas necesarios para representar un AFD.
+     */
+    
     public AFD() {
         this.inicial = null;
         this.transiciones = new HashMap<>();
@@ -199,6 +204,7 @@ public class AFD implements IProceso {
         return new StringBuilder().append(partida).append('-').append(simbolo).toString();
     }
 
+    @Override
     public boolean esFinal(int estado) {
         return finales.contains(estado);
     }

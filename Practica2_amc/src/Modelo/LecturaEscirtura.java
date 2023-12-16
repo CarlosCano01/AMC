@@ -16,9 +16,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author carlo
  */
 public class  LecturaEscirtura {
-
+    /**
+     * Comprueba y carga un autómata desde un archivo especificado por su ruta.
+     *
+     * @param filePath Ruta del archivo que contiene la definición del autómata.
+     * @return Una instancia de {@code IProceso} que representa el autómata cargado.
+     * @throws Exception Si ocurre un error durante la carga o el formato del archivo es incorrecto.
+     */
     public static IProceso ComprobarYCargar(String filePath) throws Exception {
-        // Aquí debería comprobar el fichero (existencia, formato, transiciones, etc.)
         IProceso aux=null;
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -69,12 +74,17 @@ public class  LecturaEscirtura {
         return aux;
         
     }
-
+    
+    /**
+     * Abre un cuadro de diálogo para que el usuario seleccione un archivo.
+     *
+     * @return El archivo seleccionado por el usuario.
+     * @throws Exception Si el usuario no selecciona ningún archivo.
+     */
     public static File  cargarFichero() throws Exception {
 
         JFileChooser fileChooser = new JFileChooser();
         File archivoSeleccionado;
-        // Configura el filtro para mostrar solo archivos de texto (opcional)
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto", "txt");
         fileChooser.setFileFilter(filter);
 
