@@ -16,6 +16,7 @@ import Vistas.Vista_Inicial;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -34,6 +35,7 @@ public class ControladorAplicación implements ActionListener {
     private VistaComprobar vComp;
     private Recursos r;
     private IProceso AutomataCargado;
+    private File archivo;
 
     public ControladorAplicación() {
         vPrincipal = new VistaPricipal();
@@ -75,18 +77,27 @@ public class ControladorAplicación implements ActionListener {
         switch (e.getActionCommand()) {
             case "Cargar Fichero": {
                 try {
-                    AutomataCargado = LecturaEscirtura.cargarFichero();
-                    System.out.println(AutomataCargado.toString());
+           
+                    archivo=LecturaEscirtura.cargarFichero();
+                    AutomataCargado = LecturaEscirtura.ComprobarYCargar(archivo.getAbsolutePath());
+                    r.mostrarArchivo(archivo.getName());
+                } catch (Exception ex) {
+                    vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
+                }
+            }
+            break;
+            case "ComprobarPalabra":  {
+                try {
+                    if(AutomataCargado==null)
+                        throw new Exception("Debes de selecionar un archivo o crear uno");
+                    muestraPanel(vComp);
                 } catch (Exception ex) {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }
             }
 
-            case "ComprobarPalabra": {
-                muestraPanel(vComp);
-            }
-
             break;
+
             case "Crear Fichero": {
                 muestraPanel(vCrear);
             }
@@ -119,12 +130,8 @@ public class ControladorAplicación implements ActionListener {
             break;
             case "Comprobar": {
                 try {
+                    r.mostrarComprobación(AutomataCargado);
 
-                    if (r.ComprobarP(AutomataCargado)) {
-                        vComp.setResultadoLabelText("La cadena pertenece al automata");
-                    } else {
-                        vComp.setResultadoLabelText("La cadena no pertenece al automata");
-                    }
                 } catch (Exception ex) {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());
                 }

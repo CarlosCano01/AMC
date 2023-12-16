@@ -209,6 +209,10 @@ public class AFND implements IProceso {
      }
 
     @Override
+     public String PasoaPaso(){
+        return "No esta hecho"; 
+     }
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ESTADOS: ").append(estados.toString()).append("\n")

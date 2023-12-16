@@ -23,6 +23,7 @@ public class AFD implements IProceso {
     private Set<Character> simbolos;
     private String inicial;
     private Map<String, String> transiciones;
+    private String pasoapaso="";
 
     public AFD() {
         this.inicial = null;
@@ -137,24 +138,34 @@ public class AFD implements IProceso {
     public boolean reconocer(String cadena) throws Exception {
         char[] simbol = cadena.toCharArray();
         String estado = inicial;
-        
-        
+        pasoapaso="";
+        introducirNuevoPaso("Estado Inicial    Simbolo       Estado Final");
         for (char simbolo : simbol) {
             if (!this.simbolos.contains(simbolo)) {
                 throw new Exception("Simbolo en cadena no reconocido");
             }
             String principio=estado;
             estado = this.transiciones.get(formarCondicion(estado, simbolo));
-            System.out.println(principio+" con "+ simbolo +" a "+ estado);
             if (estado == null) {
+                introducirNuevoPaso("\n"+principio+"\t"+ simbolo +"\testado muerto");
                 return false;
+                
             }
+            introducirNuevoPaso("\n"+principio+"\t"+ simbolo +"\t"+ estado);
+            
 
         }
 
         return finales.contains(estado);
     }
-
+    
+    private void introducirNuevoPaso(String NuevoPaso){
+        pasoapaso+=NuevoPaso;
+    }
+    @Override
+    public String PasoaPaso(){
+        return pasoapaso;
+    }
     /**
      * Representación en cadena del autómata.
      *

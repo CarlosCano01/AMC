@@ -51,7 +51,7 @@ public class VistaPricipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Aplicación");
 
         jMenuItemComprobar.setText("Comprobar Palabra");
         jMenuItemComprobar.setActionCommand("ComprobarPalabra");

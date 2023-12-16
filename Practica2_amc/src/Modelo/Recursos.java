@@ -9,7 +9,6 @@ import Vistas.VistaComprobar;
 import Vistas.Vista_Crearfichero;
 import java.awt.Dialog;
 
-
 /**
  *
  * @author carlo
@@ -25,8 +24,7 @@ public class Recursos {
         this.vAt = vATransicion;
         this.vComprobar = vComprobar;
     }
-    
-    
+
     public IProceso crearautomata() throws Exception {
         String variable;
         String[] array;
@@ -70,7 +68,7 @@ public class Recursos {
             a.addfinales(array);
             //transiciones
             while (vCrear.modeloTablaTransiciones.getRowCount() > 0) {
-                a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(),vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0),vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
+                a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(), vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0), vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
                 vCrear.modeloTablaTransiciones.removeRow(0);
             }
             a.validar();
@@ -97,13 +95,34 @@ public class Recursos {
     }
 
     public boolean ComprobarP(IProceso Automata) throws Exception {
-        String cadena= vComprobar.jTextField1.getText();
-        if( Automata.reconocer(cadena)){
+        String cadena = vComprobar.jTextField1.getText();
+        if (Automata.reconocer(cadena)) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
     }
 
+    public void mostrarArchivo(String archivo) {
+        vComprobar.jLabelarchivo.setText(archivo);
+        vComprobar.setResultadoLabelText(" ");
+    }
+
+    public String mostrarPasoaPaso(IProceso Automata) {
+        vComprobar.jTextAreaMostrarProceso.setText("");
+        return Automata.PasoaPaso();
+    }
+
+    public void mostrarComprobación( IProceso AutomataCargado) throws Exception {
+        if (ComprobarP(AutomataCargado)) {
+            vComprobar.jTextAreaMostrarProceso.setText("");
+            vComprobar.setResultadoLabelText("La cadena pertenece al automata");
+            vComprobar.jTextAreaMostrarProceso.setText(mostrarPasoaPaso(AutomataCargado));
+        } else {
+            vComprobar.jTextAreaMostrarProceso.setText("");
+            vComprobar.jTextAreaMostrarProceso.setText(mostrarPasoaPaso(AutomataCargado));
+            vComprobar.setResultadoLabelText("La cadena no pertenece al automata");
+        }
+    }
 }

@@ -17,7 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class  LecturaEscirtura {
 
-    private static IProceso ComprobarYCargar(String filePath) throws Exception {
+    public static IProceso ComprobarYCargar(String filePath) throws Exception {
         // Aquí debería comprobar el fichero (existencia, formato, transiciones, etc.)
         IProceso aux=null;
         try {
@@ -61,16 +61,16 @@ public class  LecturaEscirtura {
                     throw new AssertionError();
             }
         } catch (IOException e) {
-            System.out.println("Error al cargar el fichero.");
+            throw new Exception("Error al cargar el fichero.");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
         
         return aux;
         
     }
 
-    public static IProceso cargarFichero() throws Exception {
+    public static File  cargarFichero() throws Exception {
 
         JFileChooser fileChooser = new JFileChooser();
         File archivoSeleccionado;
@@ -91,7 +91,9 @@ public class  LecturaEscirtura {
             throw new Exception("No se ha selecionado ningun fichero");
         }
         
-        return ComprobarYCargar(archivoSeleccionado.getAbsolutePath());
+        return archivoSeleccionado;
 
     }
+    
+   
 }

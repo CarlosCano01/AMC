@@ -40,7 +40,7 @@ public class Vista_Inicial extends javax.swing.JPanel {
         jLabel2.setText("Carlos Cano Espinosa");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel3.setText("Nacho Velázquez ");
+        jLabel3.setText("Nacho Velázquez Muñoz ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
