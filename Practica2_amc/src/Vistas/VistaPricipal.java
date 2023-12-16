@@ -15,7 +15,7 @@ public class VistaPricipal extends javax.swing.JFrame {
      */
     public VistaPricipal() {
         initComponents();
-        setSize(850, 420);
+        setSize(850, 520);
     }
 
     /**

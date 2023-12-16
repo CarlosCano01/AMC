@@ -56,8 +56,6 @@ public class VistaComprobar extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("jLabel2");
-
         jLabel3.setText("El archivo cargado es: ");
 
         jLabelarchivo.setText("ninguno");
