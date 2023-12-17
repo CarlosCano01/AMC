@@ -20,7 +20,7 @@ public class AFND implements IProceso {
     private Set<String> estados, finales;
     private String inicial;
     private Set<Character> simbolos;
-    private Map<String, String[]> transiciones;
+    private Map<String, String[]> transiciones,transicionesEpsilon;
 
     public AFND() {
         estados = new HashSet<>();
@@ -28,6 +28,7 @@ public class AFND implements IProceso {
         simbolos = new HashSet<>();
         inicial = null;
         transiciones = new HashMap<>();
+        transicionesEpsilon= new HashMap<>();
     }
 
     public void setinicial(String inicial) {
@@ -52,6 +53,9 @@ public class AFND implements IProceso {
 
     public Map<String, String[]> getTransiciones() {
         return transiciones;
+    }
+    public Map<String, String[]> gettransicionesEpsilon() {
+        return transicionesEpsilon;
     }
 
     @Override
@@ -82,7 +86,6 @@ public class AFND implements IProceso {
     }
     
     public void addTransicion(String partida, Character simbolo, String resultado) {
-        
         if(transiciones.get(formarCondicion(partida, simbolo))!=null){
             String[] valoresActuales = transiciones.get(formarCondicion(partida, simbolo));
 
@@ -101,18 +104,25 @@ public class AFND implements IProceso {
             simbolos.add(simbolo);
         }
     }
-    
-    public void lambdaClausura(String estado, Set<String> nuevos) {
-        String[] resultados = transiciones.get(estado);
-        if (resultados != null) {
-            for (String resultado : resultados) {
-                if (!nuevos.contains(resultado)) {
-                    nuevos.add(resultado);
-                    lambdaClausura(resultado, nuevos);
-                }
-            }
+     public void addtransicionesEpsilon(String partida, String resultado) {
+         System.out.println(partida+""+resultado);
+        if(transicionesEpsilon.get(partida)!=null){
+            String[] valoresActuales = transicionesEpsilon.get(partida);
+
+
+            String[] nuevosValores = new String[valoresActuales.length + 1];
+            System.arraycopy(valoresActuales, 0, nuevosValores, 0, valoresActuales.length);
+            nuevosValores[nuevosValores.length - 1] = resultado;
+
+
+            transicionesEpsilon.put(partida, nuevosValores);
+        }else{
+            String[] valoresActuales = new String[]{resultado};
+            transicionesEpsilon.put(partida, valoresActuales);
         }
     }
+    
+
 
     public static String formarCondicion(String partida, Character simbolo) {
         return simbolo == null ? partida : new StringBuilder().append(partida).append('-').append(simbolo).toString();
@@ -177,20 +187,20 @@ public class AFND implements IProceso {
     @Override
     public boolean reconocer(String cadena) throws Exception {
         char[] simbol = cadena.toCharArray();
-
+        String iniciales=inicial;
         Set<String> macroestado = new HashSet<>();
-        macroestado.add(inicial);
+        macroestado.add(iniciales);
         Set<String> nuevos = new HashSet<>();
         for (char simbolo : simbol) {
             if (!this.simbolos.contains(simbolo)) {
                 throw new Exception("Simbolo en cadena no reconocido");
             }
             for (String estado : macroestado) {
-                lambdaClausura(estado, nuevos);
+                String[] siguientes = transicionesEpsilon.get(estado);
+                if(siguientes != null) {
+                    macroestado.addAll(Arrays.asList(siguientes));
+                }
             }
-            macroestado.addAll(nuevos);
-
-            nuevos.clear();
             for (String estado : macroestado) {
                 String[] siguientes = transiciones.get(formarCondicion(estado, simbolo));
                 if (siguientes != null) {
@@ -202,10 +212,13 @@ public class AFND implements IProceso {
             nuevos.clear();
 
             if (macroestado.isEmpty()) {
-                throw new Exception("El macroestado se ha quedado vacio");
+                return false;
             }
         }
-        return finales.containsAll(macroestado);
+        for (String estado : macroestado) {
+            return finales.contains(estado);
+        }
+        return false;
      }
 
     @Override
@@ -229,6 +242,13 @@ public class AFND implements IProceso {
                 sb.append("\t").append(key).append(" -> ");
             }
             sb.append(Arrays.asList(value)).append("\n");
+        }
+        sb.append("TRANSICIONES LAMBDA:").append("\n");
+        for (Map.Entry<String, String[]> transicion : transicionesEpsilon.entrySet()) {
+            System.out.println(transicion.getKey()+" "+Arrays.asList(transicion.getValue()));
+            String[] value = transicion.getValue();
+            sb.append("\t").append(transicion.getKey()).append(" ").append(Arrays.asList(value)).append("\n");
+  
         }
         sb.append("FIN");
         return sb.toString();

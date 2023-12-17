@@ -79,6 +79,7 @@ public class ControladorAplicación implements ActionListener {
            
                     archivo=LecturaEscirtura.cargarFichero();
                     AutomataCargado = LecturaEscirtura.ComprobarYCargar(archivo.getAbsolutePath());
+                    System.out.println(AutomataCargado.toString());
                     r.mostrarArchivo(archivo.getName());
                 } catch (Exception ex) {
                     vMensaje.Mensaje(vPrincipal, "ERROR", ex.getMessage());

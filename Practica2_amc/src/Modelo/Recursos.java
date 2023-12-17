@@ -68,7 +68,12 @@ public class Recursos {
             a.addfinales(array);
             //transiciones
             while (vCrear.modeloTablaTransiciones.getRowCount() > 0) {
-                a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(), vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0), vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
+                if(!vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().equals("")){
+                    a.addTransicion(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(), vCrear.modeloTablaTransiciones.getValueAt(0, 1).toString().charAt(0), vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
+                }else{
+                    a.addtransicionesEpsilon(vCrear.modeloTablaTransiciones.getValueAt(0, 0).toString(), vCrear.modeloTablaTransiciones.getValueAt(0, 2).toString());
+                }
+                    
                 vCrear.modeloTablaTransiciones.removeRow(0);
             }
             a.validar();
