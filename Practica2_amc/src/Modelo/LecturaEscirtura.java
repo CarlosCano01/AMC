@@ -81,7 +81,6 @@ public class  LecturaEscirtura {
                             automataFND.addfinales(finales);
                         }else if ("TRANSICIONES:".equals(parts[0])) {
                             while (!"TRANSICIONES LAMBDA:".equals(line = br.readLine())) {
-
                                 String[] partes = line.split(" ");
                                 for (int i = 2; i < partes.length; i++) {
                                     automataFND.addTransicion(partes[0], partes[1].charAt(1), partes[i]);

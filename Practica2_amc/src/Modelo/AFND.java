@@ -22,6 +22,7 @@ public class AFND implements IProceso {
     private Set<Character> simbolos;
     private Map<String, String[]> transiciones,transicionesEpsilon;
 
+
     public AFND() {
         estados = new HashSet<>();
         finales = new HashSet<>();
@@ -105,7 +106,6 @@ public class AFND implements IProceso {
         }
     }
      public void addtransicionesEpsilon(String partida, String resultado) {
-         System.out.println(partida+""+resultado);
         if(transicionesEpsilon.get(partida)!=null){
             String[] valoresActuales = transicionesEpsilon.get(partida);
 
@@ -189,6 +189,7 @@ public class AFND implements IProceso {
         char[] simbol = cadena.toCharArray();
         String iniciales=inicial;
         Set<String> macroestado = new HashSet<>();
+        Set<String> pasitoapasito=new HashSet<>();
         macroestado.add(iniciales);
         Set<String> nuevos = new HashSet<>();
         for (char simbolo : simbol) {
@@ -202,7 +203,9 @@ public class AFND implements IProceso {
                 }
             }
             for (String estado : macroestado) {
+                pasitoapasito.add(estado);
                 String[] siguientes = transiciones.get(formarCondicion(estado, simbolo));
+                pasitoapasito.addAll(Arrays.asList(siguientes));
                 if (siguientes != null) {
                     nuevos.addAll(Arrays.asList(siguientes));
                 }
@@ -212,18 +215,25 @@ public class AFND implements IProceso {
             nuevos.clear();
 
             if (macroestado.isEmpty()) {
+                for (String estado : pasitoapasito) {
+                    System.out.println(estado);
+                }
                 return false;
             }
         }
+        for (String estado : pasitoapasito) {
+                    System.out.println(estado);
+                }
         for (String estado : macroestado) {
             return finales.contains(estado);
         }
         return false;
      }
+    
 
     @Override
      public String PasoaPaso(){
-        return "No esta hecho"; 
+        return "No esta hecho";
      }
     @Override
     public String toString() {
@@ -245,7 +255,6 @@ public class AFND implements IProceso {
         }
         sb.append("TRANSICIONES LAMBDA:").append("\n");
         for (Map.Entry<String, String[]> transicion : transicionesEpsilon.entrySet()) {
-            System.out.println(transicion.getKey()+" "+Arrays.asList(transicion.getValue()));
             String[] value = transicion.getValue();
             sb.append("\t").append(transicion.getKey()).append(" ").append(Arrays.asList(value)).append("\n");
   
